@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gabriel Morishita — Dev Front-end (React/TS)</title>
-  <meta name="description" content="Portfólio de Gabriel Morishita, desenvolvedor front-end focado em UI, DX e componentes reutilizáveis em React, TypeScript e Supabase.">
-  <meta property="og:title" content="Gabriel Morishita — Dev Front-end (React/TS)">
-  <meta property="og:description" content="Construo UIs rápidas e reutilizáveis. Hoje: React/TS, Supabase, Cypress.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://morishita.dev">
-  <meta property="og:image" content="https://morishita.dev/cover.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitor Costa — Dev Front-end (React/TS)</title>
+  <meta name="description" content="Portfólio de Vitor Costa, desenvolvedor front-end focado em UI, DX e componentes reutilizáveis com React, TypeScript, Supabase e Cypress." />
+  <meta property="og:title" content="Vitor Costa — Dev Front-end (React/TS)" />
+  <meta property="og:description" content="Construo UIs rápidas e reutilizáveis. Hoje: React/TS, Supabase, Cypress." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vitorcosta.dev" />
+  <meta property="og:image" content="https://vitorcosta.dev/cover.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Gabriel Morishita",
+    "name": "Vitor Costa",
     "jobTitle": "Desenvolvedor Front-end",
-    "url": "https://morishita.dev",
+    "url": "https://vitorcosta.dev",
+    "email": "mailto:vitor@vcosta.dev",
     "sameAs": [
-      "https://github.com/gabrielmorishita",
-      "https://www.linkedin.com/in/gabrielmorishita"
+      "https://github.com/vitorcosta",
+      "https://www.linkedin.com/in/vitorcosta"
     ],
     "knowsAbout": [
       "React",
@@ -38,10 +41,11 @@
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="progress-bar" aria-hidden="true"></div>
+
   <header class="site-header" data-reveal>
     <div class="container">
       <nav class="nav">
-        <a href="#hero" class="brand" aria-label="Gabriel Morishita">GM</a>
+        <a href="#hero" class="brand" aria-label="Vitor Costa">VC</a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
           <span class="nav-toggle__line"></span>
           <span class="nav-toggle__line"></span>
@@ -52,6 +56,7 @@
           <li><a href="#stack">Stack</a></li>
           <li><a href="#projetos">Projetos</a></li>
           <li><a href="#experiencia">Experiência</a></li>
+          <li><a href="#educacao">Educação</a></li>
           <li><a href="#resultados">Resultados</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
@@ -61,25 +66,26 @@
       </nav>
     </div>
   </header>
+
   <main>
     <section id="hero" class="section hero" data-reveal>
       <div class="container hero__content">
         <div class="hero__text">
           <p class="eyebrow">Disponível para desafios 2025</p>
           <h1>Dev Front-end (React/TS) — foco em UI e DX.</h1>
-          <p class="lead">Construo UIs rápidas, reutilizáveis e testáveis. Hoje estou orquestrando grids genéricos, modais dinâmicos, automações de testes E2E e integração Supabase.</p>
+          <p class="lead">Sou dev júnior. Curto criar componentes reutilizáveis, padronizar CRUDs com grid e modais, e garantir qualidade com Cypress. No pessoal, brinco com Supabase (Postgres + RLS) e uns projetos Three.js para entender física/3D e UX de controles.</p>
           <div class="hero__cta">
             <a class="btn btn--primary" href="#projetos" data-ripple>Ver projetos</a>
-            <a class="btn btn--ghost" href="./assets/CV-Gabriel-Morishita.pdf" download data-ripple>Baixar CV</a>
+            <a class="btn btn--ghost" href="./assets/CV-Vitor-Costa.pdf" download data-ripple>Baixar CV</a>
           </div>
           <div class="hero__meta">
             <span class="badge badge--accent">+ Gamer</span>
-            <span>UI acessível • DX primeiro • Metas mensuráveis</span>
+            <span>UI acessível • RLS no Supabase • DX mensurável</span>
           </div>
         </div>
         <figure class="hero__portrait" aria-labelledby="bio-photo">
-          <img src="assets/gabriel-portrait.svg" alt="Foto estilizada de Gabriel Morishita" loading="lazy" decoding="async">
-          <figcaption id="bio-photo">Focado em sistemas táticos, jogos e experiências que entregam valor.</figcaption>
+          <img src="assets/vitor-portrait.svg" alt="Foto estilizada de Vitor Costa" loading="lazy" decoding="async" />
+          <figcaption id="bio-photo">Curioso por Supabase, física 3D e experiências que entregam valor.</figcaption>
         </figure>
       </div>
     </section>
@@ -88,30 +94,31 @@
       <div class="container grid grid--2">
         <div>
           <h2>Sobre</h2>
-          <p>Sou estagiário de desenvolvimento front-end com obsessão em melhorar DX e escalar componentes. Transformo demandas confusas em experiências polidas que reduzem tempo de entrega.</p>
-          <p class="muted">Gamer nas horas vagas (estratégia, tática, UI readability). Fã de Mass Effect, Baldur's Gate 3 e puzzles que desafiam o raciocínio.</p>
+          <p>Sou dev júnior focado em criar componentes reutilizáveis, padronizar CRUDs com grids e modais, e entregar DX consistente para o squad. Transformo demandas confusas em fluxos previsíveis e mensuráveis.</p>
+          <p class="muted">No pessoal, estudo Supabase (Postgres + RLS), brinco com projetos Three.js para entender física/3D e treino leitura de sistemas em jogos táticos.</p>
           <div class="about__now">
             <h3>Hoje eu tô mexendo com</h3>
             <ul class="chip-list">
-              <li class="chip" data-tooltip="Hooks com React Query, TanStack Table custom">React/TS</li>
-              <li class="chip" data-tooltip="Styled-system orientado a tokens">Styled Components</li>
-              <li class="chip" data-tooltip="Row Level Security, storage e triggers">Supabase</li>
-              <li class="chip" data-tooltip="Dashboards com Recharts e foco em acessibilidade">Recharts</li>
-              <li class="chip" data-tooltip="Cenários E2E cobrindo fluxos críticos">Cypress</li>
+              <li class="chip" data-tooltip="Hooks específicos, TanStack Table e testes de integração">React/TypeScript</li>
+              <li class="chip" data-tooltip="Tokens, temas dinâmicos e componentes polidos">Styled-Components</li>
+              <li class="chip" data-tooltip="TanStack Table com colunas dinâmicas e filtros hora-only">TanStack React-Table</li>
+              <li class="chip" data-tooltip="Supabase com RLS, policies e SQL focado em finanças">Supabase</li>
+              <li class="chip" data-tooltip="Dashboards acessíveis e indicadores com foco em leitura">Recharts</li>
+              <li class="chip" data-tooltip="Fluxos CRUD críticos, toasts e combos">Cypress</li>
             </ul>
           </div>
         </div>
         <div class="about__proof">
           <h3>Provas reais</h3>
           <ul>
-            <li><strong>Grid genérico</strong> para CRUD, filtros avançados e clonagem em segundos.</li>
-            <li><strong>Modais dinâmicos</strong> que tratam Create/Update/Clone com DX padronizada.</li>
-            <li><strong>Testes E2E com Cypress</strong> garantindo regressões zero e performance sustentável.</li>
+            <li><strong>Grid genérico</strong> para CRUD com filtros hora-only, clone e derivação.</li>
+            <li><strong>Modais dinâmicos</strong> que tratam Create/Update/Clone/Derivação com validação única.</li>
+            <li><strong>Suite Cypress</strong> cobrindo fluxos críticos com helpers reutilizáveis.</li>
           </ul>
           <div class="about__achievements">
-            <span class="badge">100% Lighthouse</span>
-            <span class="badge">10+ componentes reutilizáveis</span>
-            <span class="badge">E2E verde 12 semanas</span>
+            <span class="badge">CRUDs padronizados</span>
+            <span class="badge">Menos retrabalho na squad</span>
+            <span class="badge">Releases com confiança</span>
           </div>
         </div>
       </div>
@@ -126,10 +133,12 @@
           </div>
           <div class="stack__filters" role="tablist" aria-label="Categorias de habilidades">
             <button class="chip is-active" role="tab" aria-selected="true" data-category="all" data-ripple>Todos</button>
-            <button class="chip" role="tab" aria-selected="false" data-category="frontend" data-ripple>Frontend</button>
-            <button class="chip" role="tab" aria-selected="false" data-category="tests" data-ripple>Testes</button>
-            <button class="chip" role="tab" aria-selected="false" data-category="db" data-ripple>Dados</button>
-            <button class="chip" role="tab" aria-selected="false" data-category="tools" data-ripple>Ferramentas</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="frontend" data-ripple>Front-end</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="runtime" data-ripple>Back/Runtime</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="db" data-ripple>Banco de Dados</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="tests" data-ripple>Testes/Qualidade</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="tooling" data-ripple>Tooling</button>
+            <button class="chip" role="tab" aria-selected="false" data-category="others" data-ripple>Outros</button>
           </div>
         </div>
         <div class="stack__grid" role="tabpanel" aria-live="polite"></div>
@@ -138,7 +147,7 @@
           <p class="stack__details muted">Selecione uma skill para ver contexto.</p>
           <div class="stack__gamer">
             <h4>Badge + Gamer</h4>
-            <p>Favoritos: Baldur's Gate 3, Factorio, Into the Breach. Me ajudam a treinar leitura de sistemas, antecipar exceções e criar UIs claras para decisões rápidas.</p>
+            <p>Favoritos: Baldur's Gate 3, Mass Effect Legendary, Into the Breach. Servem para treinar leitura de sistemas, antecipar exceções e criar UIs claras para decisões rápidas.</p>
           </div>
         </aside>
       </div>
@@ -155,44 +164,61 @@
         <div class="projects__grid">
           <article class="project-card" data-project="financas" tabindex="0">
             <div class="project-card__media">
-              <img src="assets/financas-lite.svg" alt="Dashboard de finanças" loading="lazy" decoding="async">
+              <img src="assets/financas-lite.svg" alt="Interface do Finanças Lite" loading="lazy" decoding="async" />
             </div>
             <div class="project-card__body">
               <h3>Finanças Lite</h3>
-              <p>Dashboard financeiro com Supabase, RLS e UI de contas/categorias otimizada.</p>
               <ul>
-                <li>+32% velocidade para lançar transferências.</li>
-                <li>Esquema modelado com políticas de acesso seguras.</li>
-                <li>UI com visão consolidada por período.</li>
+                <li><strong>Problema:</strong> controlar contas, categorias e transferências com segurança por usuário.</li>
+                <li><strong>Solução:</strong> schema Supabase com enums e policies RLS, UI focada em lançamentos e filtros rápidos.</li>
+                <li><strong>Resultado:</strong> base sólida para app pessoal com autenticação e segurança no DB.</li>
               </ul>
+              <p class="project-card__role">Meu papel: modelagem, UI e integração completa.</p>
             </div>
           </article>
+
           <article class="project-card" data-project="grid" tabindex="0">
             <div class="project-card__media">
-              <img src="assets/generic-grid.svg" alt="Tabela com filtros avançados" loading="lazy" decoding="async">
+              <img src="assets/generic-grid.svg" alt="Tabela com grid genérico" loading="lazy" decoding="async" />
             </div>
             <div class="project-card__body">
-              <h3>Generic Grid & Modals</h3>
-              <p>Componente reutilizável que gera CRUD com filtros, colunas dinâmicas e DX amigável.</p>
+              <h3>Grid & Modais Genéricos — VTT</h3>
               <ul>
-                <li>Reduziu 45% do tempo de novas telas.</li>
-                <li>Combos dinâmicos e filtros tempo-only.</li>
-                <li>Modais Create/Update/Clone com validação uniforme.</li>
+                <li><strong>Problema:</strong> agilizar telas CRUD sem perder padrão de UX.</li>
+                <li><strong>Solução:</strong> componentes reusáveis com Create/Update/Clone/Derivação e combos dinâmicos.</li>
+                <li><strong>Resultado:</strong> telas novas com menos esforço e DX previsível para quem usa o grid.</li>
               </ul>
+              <p class="project-card__role">Meu papel: implementação dos componentes e ajustes de UX/padrões.</p>
             </div>
           </article>
-          <article class="project-card" data-project="helper" tabindex="0">
+
+          <article class="project-card" data-project="suite" tabindex="0">
             <div class="project-card__media">
-              <img src="assets/mass-effect-helper.svg" alt="Interface de companion Mass Effect" loading="lazy" decoding="async">
+              <img src="assets/cypress-suite.svg" alt="Tela representando suíte de testes E2E" loading="lazy" decoding="async" />
             </div>
             <div class="project-card__body">
-              <h3>Mass Effect Codex Helper</h3>
-              <p>Ferramenta para comparar builds e estratégias, com foco em acessibilidade e performance.</p>
+              <h3>Suite de Testes E2E — VTT</h3>
               <ul>
-                <li>Search instantâneo com cache em IndexedDB.</li>
-                <li>Atalhos de teclado e leitura otimizada.</li>
-                <li>UI responsiva com parallax e feedback auditivo opcional.</li>
+                <li><strong>Problema:</strong> regressões em fluxos CRUD e filtros estratégicos.</li>
+                <li><strong>Solução:</strong> bateria Cypress por tipo (create, update, filter) com helpers como pickFromCombo.</li>
+                <li><strong>Resultado:</strong> releases com mais confiança e triagem de bugs mais rápida.</li>
               </ul>
+              <p class="project-card__role">Meu papel: escrita e manutenção dos testes e utilitários.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-project="newton" tabindex="0">
+            <div class="project-card__media">
+              <img src="assets/newtons-cannon.svg" alt="Simulação Newton's Cannon em Three.js" loading="lazy" decoding="async" />
+            </div>
+            <div class="project-card__body">
+              <h3>Newton’s Cannon 3D</h3>
+              <ul>
+                <li><strong>Ideia:</strong> simular o canhão de Newton com órbitas e colisões.</li>
+                <li><strong>Solução:</strong> cena Three.js com slider de velocidade, pausa em colisão e UI mínima.</li>
+                <li><strong>Aprendizado:</strong> física básica, controle de cena e UX de controles 3D.</li>
+              </ul>
+              <p class="project-card__role">Meu papel: conceito, código e UI.</p>
             </div>
           </article>
         </div>
@@ -218,42 +244,74 @@
             <div class="timeline__marker"></div>
             <div class="timeline__content">
               <header>
-                <h3>Front-end Intern · Stealth SaaS</h3>
-                <span>2024 — Atual</span>
+                <h3>VTT · Estagiário de Desenvolvimento de Software</h3>
+                <span>2025 — atual</span>
               </header>
               <ul>
-                <li>Implementei grid genérico que reduziu 45% do tempo de novas telas.</li>
-                <li>Orquestrei modais dinâmicos com validação compartilhada e analytics de uso.</li>
-                <li>Estabeleci suíte Cypress com 18 fluxos críticos e monitoramento diário.</li>
+                <li>Padronizei CRUDs com grid e modais genéricos, acelerando a criação de telas.</li>
+                <li>Estruturei testes E2E com Cypress (utils, toasts, combos, fechamento de modais).</li>
+                <li>Suporte a dashboards com Recharts e Styled-Components para manter a UI consistente.</li>
               </ul>
               <div class="timeline__tags">
                 <span class="tag">React</span>
                 <span class="tag">TypeScript</span>
+                <span class="tag">Styled-Components</span>
+                <span class="tag">TanStack Table</span>
+                <span class="tag">Recharts</span>
                 <span class="tag">Cypress</span>
-                <span class="tag">Supabase</span>
-              </div>
-            </div>
-          </li>
-          <li class="timeline__item">
-            <div class="timeline__marker"></div>
-            <div class="timeline__content">
-              <header>
-                <h3>Product Designer Jr · Comunidade Gamer</h3>
-                <span>2022 — 2023</span>
-              </header>
-              <ul>
-                <li>Projetei HUD responsiva para eventos com +15k espectadores simultâneos.</li>
-                <li>Criei design system com tokens e estados focados em contraste e leitura.</li>
-                <li>Facilitei handoff com documentação interativa e protótipos navegáveis.</li>
-              </ul>
-              <div class="timeline__tags">
-                <span class="tag">Figma</span>
-                <span class="tag">Motion</span>
-                <span class="tag">Acessibilidade</span>
               </div>
             </div>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section id="educacao" class="section education" data-reveal>
+      <div class="container">
+        <div class="section__header">
+          <h2>Educação & Cursos</h2>
+          <p class="muted">Base acadêmica em computação + trilha contínua de dados, front-end e qualidade.</p>
+        </div>
+        <div class="education__body grid grid--2">
+          <div>
+            <h3>Graduação</h3>
+            <p>Graduação em área de Computação (em andamento).</p>
+            <p class="muted">Disciplinas/assuntos de interesse: Qualidade de Software, Banco de Dados, Autômatos &amp; Linguagens Formais, Big Data e Sistemas Distribuídos.</p>
+          </div>
+          <div>
+            <h3>Cursos recentes</h3>
+            <ul class="education__grid">
+              <li class="education-card">
+                <img src="assets/certificate-bradesco.svg" alt="Fundação Bradesco" loading="lazy" decoding="async" />
+                <div>
+                  <h4>Fundação Bradesco — Introdução a Banco de Dados</h4>
+                  <span>2024 · 12h</span>
+                </div>
+              </li>
+              <li class="education-card">
+                <img src="assets/certificate-bradesco.svg" alt="Fundação Bradesco" loading="lazy" decoding="async" />
+                <div>
+                  <h4>Fundação Bradesco — Modelagem de Dados Relacional</h4>
+                  <span>2024 · 10h</span>
+                </div>
+              </li>
+              <li class="education-card">
+                <img src="assets/certificate-alura.svg" alt="Alura" loading="lazy" decoding="async" />
+                <div>
+                  <h4>Alura — React com TypeScript</h4>
+                  <span>2025 · Imersão Front-end</span>
+                </div>
+              </li>
+              <li class="education-card">
+                <img src="assets/certificate-alura.svg" alt="Alura" loading="lazy" decoding="async" />
+                <div>
+                  <h4>Alura — Java e Orientação a Objetos</h4>
+                  <span>2024 · Back-end Essentials</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -263,19 +321,24 @@
           <h2>Resultados & Métricas</h2>
           <p class="muted">Números que mostram impacto direto.</p>
           <div class="counters">
-            <div class="counter" data-target="32">
-              <span class="counter__value">0</span>
-              <span class="counter__label">+ componentes reutilizáveis</span>
-            </div>
-            <div class="counter" data-target="45">
-              <span class="counter__value">0</span>
-              <span class="counter__label">− tempo para criar novas telas (%)</span>
-            </div>
             <div class="counter" data-target="18">
               <span class="counter__value">0</span>
-              <span class="counter__label">testes E2E estáveis</span>
+              <span class="counter__label">componentes reutilizáveis ativos</span>
+            </div>
+            <div class="counter" data-target="40">
+              <span class="counter__value">0</span>
+              <span class="counter__label">redução no tempo de novas telas (%)</span>
+            </div>
+            <div class="counter" data-target="24">
+              <span class="counter__value">0</span>
+              <span class="counter__label">fluxos E2E monitorados</span>
             </div>
           </div>
+          <ul class="results__bullets">
+            <li>Padronização de CRUDs e ganho de velocidade na criação de telas.</li>
+            <li>Menos retrabalho para squads graças a componentes reutilizáveis.</li>
+            <li>Releases com mais confiança com suíte Cypress rodando todo dia.</li>
+          </ul>
         </div>
         <div class="results__charts">
           <figure class="chart" aria-label="Comparativo de tempo de criação de tela antes e depois">
@@ -311,32 +374,33 @@
         </div>
         <div class="certificates__grid">
           <article class="certificate-card">
-            <img src="assets/certificate-react.svg" alt="Logo React" loading="lazy" decoding="async">
+            <img src="assets/certificate-react.svg" alt="Logo React" loading="lazy" decoding="async" />
             <div>
-              <h3>React Avançado</h3>
+              <h3>Alura · React com TypeScript</h3>
               <a href="#">Ver certificado</a>
             </div>
           </article>
           <article class="certificate-card">
-            <img src="assets/certificate-testing.svg" alt="Logo Cypress" loading="lazy" decoding="async">
+            <img src="assets/certificate-testing.svg" alt="Logo Cypress" loading="lazy" decoding="async" />
             <div>
-              <h3>Testes E2E com Cypress</h3>
+              <h3>Cypress · E2E Fundamentals</h3>
               <a href="#">Ver certificado</a>
             </div>
           </article>
           <article class="certificate-card">
-            <img src="assets/certificate-supabase.svg" alt="Logo Supabase" loading="lazy" decoding="async">
+            <img src="assets/certificate-supabase.svg" alt="Logo Supabase" loading="lazy" decoding="async" />
             <div>
-              <h3>Supabase Deep Dive</h3>
+              <h3>Supabase · Segurança com RLS</h3>
               <a href="#">Ver certificado</a>
             </div>
           </article>
         </div>
+
         <div class="testimonials">
           <article class="testimonial">
-            <img src="assets/testimonial-lucas.svg" alt="Foto de Lucas" loading="lazy" decoding="async">
+            <img src="assets/testimonial-lucas.svg" alt="Foto de Lucas" loading="lazy" decoding="async" />
             <blockquote>
-              “O Gabriel transformou um backlog travado em entregas previsíveis. Os grids reutilizáveis salvaram nosso roadmap.”
+              “O Vitor transformou nosso CRUD caótico em algo previsível. Os grids e testes E2E reduziram retrabalho em semanas.”
             </blockquote>
             <cite>Lucas Andrade · Product Manager</cite>
           </article>
@@ -348,24 +412,24 @@
       <div class="container grid grid--2">
         <div>
           <h2>Contato</h2>
-          <p class="lead">Vamos construir interfaces com impacto? Me chama.</p>
+          <p class="lead">Vamos construir interfaces reutilizáveis e testáveis? Me chama.</p>
           <div class="contact__actions">
-            <a class="btn btn--primary" href="https://github.com/gabrielmorishita" target="_blank" rel="noopener" data-ripple>GitHub</a>
-            <a class="btn btn--primary" href="https://www.linkedin.com/in/gabrielmorishita" target="_blank" rel="noopener" data-ripple>LinkedIn</a>
-            <button class="btn btn--ghost" type="button" data-copy="gabriel@morishita.dev" data-ripple>Copiar e-mail</button>
+            <a class="btn btn--primary" href="https://github.com/vitorcosta" target="_blank" rel="noopener" data-ripple>GitHub</a>
+            <a class="btn btn--primary" href="https://www.linkedin.com/in/vitorcosta" target="_blank" rel="noopener" data-ripple>LinkedIn</a>
+            <button class="btn btn--ghost" type="button" data-copy="vitor@vcosta.dev" data-ripple>Copiar e-mail</button>
           </div>
           <div class="contact__feedback" role="status" aria-live="polite"></div>
           <div class="contact__qr" aria-label="QR Code para baixar o CV">
-            <img src="assets/cv-qr.svg" alt="QR Code para baixar o CV" loading="lazy" decoding="async">
+            <img src="assets/cv-qr.svg" alt="QR Code para baixar o CV" loading="lazy" decoding="async" />
           </div>
         </div>
         <div class="contact__roadmap">
           <h3>Changelog / Roadmap</h3>
           <ul>
-            <li><span class="tag">Set 2025</span> v1.0 lançado com cases e tema dinâmico.</li>
-            <li><span class="tag">Out 2025</span> Adição de métricas animadas e certificados.</li>
-            <li><span class="tag">Nov 2025</span> Depoimentos e suporte a idioma EN.</li>
-            <li><span class="tag">Jan 2026</span> Páginas detalhadas por case.</li>
+            <li><span class="tag">Jun 2025</span> v1.0 lançado com cases completos e tema dinâmico.</li>
+            <li><span class="tag">Jul 2025</span> Integração de métricas animadas e changelog vivo.</li>
+            <li><span class="tag">Ago 2025</span> Certificados extras + depoimentos curtos.</li>
+            <li><span class="tag">Out 2025</span> Página /case estática detalhada.</li>
           </ul>
         </div>
       </div>
@@ -375,7 +439,7 @@
   <footer class="site-footer">
     <div class="container footer__inner">
       <p>Feito em HTML/CSS/JS — 100% estático.</p>
-      <p>© <span id="year"></span> Gabriel Morishita.</p>
+      <p>© <span id="year"></span> Vitor Costa.</p>
     </div>
   </footer>
 
