@@ -318,7 +318,7 @@ const skills = [
   { name: 'Recharts', category: 'frontend', description: 'Dashboards acessíveis e tooltips custom.', proof: 'KPIs e gráficos de impacto para o squad.' },
   { name: 'Node.js', category: 'runtime', description: 'APIs leves e scripts.', proof: 'Endpoints auxiliares e integrações com Supabase.' },
   { name: 'Express', category: 'runtime', description: 'Rotas REST e middlewares.', proof: 'Mocks p/ testes locais e POCs.' },
-  { name: 'Java (básico)', category: 'runtime', description: 'POO, coleções e fundamentos.', proof: 'Projetos acadêmicos focados em estrutura de dados.' },
+  { name: 'Java', category: 'runtime', description: 'POO, coleções e fundamentos.', proof: 'Projetos acadêmicos focados em estrutura de dados.' },
   { name: 'Supabase (Postgres)', category: 'db', description: 'RLS, policies e SQL voltado a finanças.', proof: 'Finanças Lite com segurança por usuário e enums.' },
   { name: 'MySQL', category: 'db', description: 'Modelagem relacional e consultas.', proof: 'Projetos acadêmicos e migrações simples.' },
   { name: 'Cypress', category: 'tests', description: 'Fluxos CRUD, filtros e toasts.', proof: 'Suite por tipo com helpers como pickFromCombo.' },
