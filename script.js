@@ -149,9 +149,9 @@ if (tickerRoot) {
 }
 
 // Hero tilt effect
-const heroTiltCard = document.querySelector('.hero__visual-card[data-tilt]');
+const heroTiltCard = document.querySelector('.hero__profile-card[data-tilt]');
 if (heroTiltCard) {
-  const layers = heroTiltCard.querySelectorAll('.hero__project');
+  const layers = heroTiltCard.querySelectorAll('[data-depth]');
   let tiltAttached = false;
 
   const applyTilt = (event) => {
@@ -159,20 +159,16 @@ if (heroTiltCard) {
     if (!rect.width || !rect.height) return;
     const x = (event.clientX - rect.left) / rect.width;
     const y = (event.clientY - rect.top) / rect.height;
-    const rotateX = (0.5 - y) * 16;
-    const rotateY = (x - 0.5) * 16;
+    const rotateX = (0.5 - y) * 12;
+    const rotateY = (x - 0.5) * 12;
     heroTiltCard.style.setProperty('--tilt-rotate-x', `${rotateX.toFixed(2)}deg`);
     heroTiltCard.style.setProperty('--tilt-rotate-y', `${rotateY.toFixed(2)}deg`);
 
     layers.forEach((layer) => {
       const depth = Number(layer.dataset.depth) || 1;
-      const translateX = (x - 0.5) * depth * 18;
-      const translateY = (y - 0.5) * depth * 18;
-      layer.style.transform = `translate3d(${translateX}px, ${translateY}px, ${depth * 6}px)`;
-      const image = layer.querySelector('img');
-      if (image) {
-        image.style.transform = `scale(1.02) translate3d(${translateX * 0.4}px, ${translateY * 0.4}px, 0)`;
-      }
+      const translateX = (x - 0.5) * depth * 14;
+      const translateY = (y - 0.5) * depth * 14;
+      layer.style.transform = `translate3d(${translateX}px, ${translateY}px, ${depth * 5}px)`;
     });
   };
 
@@ -181,8 +177,6 @@ if (heroTiltCard) {
     heroTiltCard.style.setProperty('--tilt-rotate-y', '0deg');
     layers.forEach((layer) => {
       layer.style.transform = 'translate3d(0, 0, 0)';
-      const image = layer.querySelector('img');
-      if (image) image.style.transform = 'scale(1) translate3d(0, 0, 0)';
     });
   };
 
