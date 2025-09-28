@@ -118,6 +118,53 @@ const counterObserver = new IntersectionObserver(
 );
 counters.forEach((counter) => counterObserver.observe(counter));
 
+// Results timeline tabs
+const timelinePanel = document.querySelector('.results-panel--timeline');
+if (timelinePanel) {
+  const tabButtons = timelinePanel.querySelectorAll('.results-tab');
+  const chartRanges = timelinePanel.querySelectorAll('.chart-range');
+  const stats = timelinePanel.querySelectorAll('.results-panel__stat');
+  const badges = timelinePanel.querySelectorAll('.results-panel__badge');
+
+  const updateRange = (range) => {
+    if (!range) return;
+    timelinePanel.dataset.activeRange = range;
+    tabButtons.forEach((tab) => {
+      const isActive = tab.dataset.range === range;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+    });
+    chartRanges.forEach((group) => {
+      const isActive = group.dataset.range === range;
+      group.classList.toggle('is-active', isActive);
+      group.setAttribute('aria-hidden', String(!isActive));
+    });
+    stats.forEach((stat) => {
+      const isActive = stat.dataset.range === range;
+      stat.hidden = !isActive;
+    });
+    badges.forEach((badge) => {
+      const isActive = badge.dataset.range === range;
+      badge.hidden = !isActive;
+    });
+  };
+
+  updateRange(timelinePanel.dataset.activeRange || '30d');
+
+  tabButtons.forEach((tab) => {
+    tab.addEventListener('click', (event) => {
+      event.preventDefault();
+      updateRange(tab.dataset.range);
+    });
+    tab.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        updateRange(tab.dataset.range);
+      }
+    });
+  });
+}
+
 // Stack & skills
 const stackGrid = document.querySelector('.stack__grid');
 const stackPanel = document.querySelector('.stack__panel');
