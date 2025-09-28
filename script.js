@@ -1,6 +1,7 @@
 const docEl = document.documentElement;
 const root = document.documentElement;
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const storedTheme = localStorage.getItem('vc-theme');
 
 const applyTheme = (theme) => {
@@ -72,6 +73,149 @@ document.querySelectorAll('[data-ripple]').forEach((button) => {
   button.addEventListener('click', createRipple);
 });
 
+// Hero ticker
+const tickerRoot = document.querySelector('.hero__ticker');
+if (tickerRoot) {
+  const textEl = tickerRoot.querySelector('.hero__ticker-text');
+  const terms = (tickerRoot.dataset.terms || '')
+    .split('|')
+    .map((term) => term.trim())
+    .filter(Boolean);
+  let termIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let tickerTimer;
+
+  const setTickerText = (value) => {
+    if (textEl) textEl.textContent = value;
+  };
+
+  function runTicker() {
+    if (!textEl || prefersReducedMotion.matches || terms.length <= 1) return;
+    const current = terms[termIndex] || '';
+    if (!isDeleting) {
+      charIndex = Math.min(charIndex + 1, current.length);
+      setTickerText(current.slice(0, charIndex));
+      if (charIndex === current.length) {
+        isDeleting = true;
+        scheduleTicker(1500);
+        return;
+      }
+    } else {
+      charIndex = Math.max(charIndex - 1, 0);
+      setTickerText(current.slice(0, charIndex));
+      if (charIndex === 0) {
+        isDeleting = false;
+        termIndex = (termIndex + 1) % terms.length;
+        scheduleTicker(320);
+        return;
+      }
+    }
+    scheduleTicker(isDeleting ? 65 : 110);
+  }
+
+  function scheduleTicker(delay = 0) {
+    window.clearTimeout(tickerTimer);
+    tickerTimer = window.setTimeout(runTicker, delay);
+  }
+
+  function resetTicker() {
+    window.clearTimeout(tickerTimer);
+    if (!textEl || terms.length === 0) return;
+    if (prefersReducedMotion.matches || terms.length === 1) {
+      setTickerText(terms[0]);
+      return;
+    }
+    termIndex = 0;
+    charIndex = 0;
+    isDeleting = false;
+    setTickerText('');
+    scheduleTicker(160);
+  }
+
+  resetTicker();
+
+  prefersReducedMotion.addEventListener('change', () => {
+    resetTicker();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      window.clearTimeout(tickerTimer);
+    } else if (!prefersReducedMotion.matches && terms.length > 1) {
+      scheduleTicker(260);
+    }
+  });
+}
+
+// Hero tilt effect
+const heroTiltCard = document.querySelector('.hero__visual-card[data-tilt]');
+if (heroTiltCard) {
+  const layers = heroTiltCard.querySelectorAll('.hero__project');
+  let tiltAttached = false;
+
+  const applyTilt = (event) => {
+    const rect = heroTiltCard.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+    const rotateX = (0.5 - y) * 16;
+    const rotateY = (x - 0.5) * 16;
+    heroTiltCard.style.setProperty('--tilt-rotate-x', `${rotateX.toFixed(2)}deg`);
+    heroTiltCard.style.setProperty('--tilt-rotate-y', `${rotateY.toFixed(2)}deg`);
+
+    layers.forEach((layer) => {
+      const depth = Number(layer.dataset.depth) || 1;
+      const translateX = (x - 0.5) * depth * 18;
+      const translateY = (y - 0.5) * depth * 18;
+      layer.style.transform = `translate3d(${translateX}px, ${translateY}px, ${depth * 6}px)`;
+      const image = layer.querySelector('img');
+      if (image) {
+        image.style.transform = `scale(1.02) translate3d(${translateX * 0.4}px, ${translateY * 0.4}px, 0)`;
+      }
+    });
+  };
+
+  const resetTilt = () => {
+    heroTiltCard.style.setProperty('--tilt-rotate-x', '0deg');
+    heroTiltCard.style.setProperty('--tilt-rotate-y', '0deg');
+    layers.forEach((layer) => {
+      layer.style.transform = 'translate3d(0, 0, 0)';
+      const image = layer.querySelector('img');
+      if (image) image.style.transform = 'scale(1) translate3d(0, 0, 0)';
+    });
+  };
+
+  const attachTilt = () => {
+    if (tiltAttached) return;
+    heroTiltCard.addEventListener('pointermove', applyTilt);
+    heroTiltCard.addEventListener('pointerleave', resetTilt);
+    heroTiltCard.addEventListener('pointerup', resetTilt);
+    tiltAttached = true;
+  };
+
+  const detachTilt = () => {
+    if (!tiltAttached) return;
+    heroTiltCard.removeEventListener('pointermove', applyTilt);
+    heroTiltCard.removeEventListener('pointerleave', resetTilt);
+    heroTiltCard.removeEventListener('pointerup', resetTilt);
+    tiltAttached = false;
+    resetTilt();
+  };
+
+  if (!prefersReducedMotion.matches) {
+    attachTilt();
+  }
+
+  prefersReducedMotion.addEventListener('change', (event) => {
+    if (event.matches) {
+      detachTilt();
+    } else {
+      attachTilt();
+    }
+  });
+}
+
 // Intersection reveal animations
 const revealElements = document.querySelectorAll('[data-reveal]');
 const observer = new IntersectionObserver(
@@ -117,6 +261,53 @@ const counterObserver = new IntersectionObserver(
   { threshold: 0.35 }
 );
 counters.forEach((counter) => counterObserver.observe(counter));
+
+// Results timeline tabs
+const timelinePanel = document.querySelector('.results-panel--timeline');
+if (timelinePanel) {
+  const tabButtons = timelinePanel.querySelectorAll('.results-tab');
+  const chartRanges = timelinePanel.querySelectorAll('.chart-range');
+  const stats = timelinePanel.querySelectorAll('.results-panel__stat');
+  const badges = timelinePanel.querySelectorAll('.results-panel__badge');
+
+  const updateRange = (range) => {
+    if (!range) return;
+    timelinePanel.dataset.activeRange = range;
+    tabButtons.forEach((tab) => {
+      const isActive = tab.dataset.range === range;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+    });
+    chartRanges.forEach((group) => {
+      const isActive = group.dataset.range === range;
+      group.classList.toggle('is-active', isActive);
+      group.setAttribute('aria-hidden', String(!isActive));
+    });
+    stats.forEach((stat) => {
+      const isActive = stat.dataset.range === range;
+      stat.hidden = !isActive;
+    });
+    badges.forEach((badge) => {
+      const isActive = badge.dataset.range === range;
+      badge.hidden = !isActive;
+    });
+  };
+
+  updateRange(timelinePanel.dataset.activeRange || '30d');
+
+  tabButtons.forEach((tab) => {
+    tab.addEventListener('click', (event) => {
+      event.preventDefault();
+      updateRange(tab.dataset.range);
+    });
+    tab.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        updateRange(tab.dataset.range);
+      }
+    });
+  });
+}
 
 // Stack & skills
 const stackGrid = document.querySelector('.stack__grid');
