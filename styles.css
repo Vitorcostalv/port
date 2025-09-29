@@ -2228,9 +2228,7 @@ button:focus-visible,
   color: var(--text-strong);
 }
 
-:root[data-theme='light'] .hero__title-highlight {
-  background: linear-gradient(120deg, var(--brand-500) 0%, var(--accent-500) 55%, var(--brand-hover) 100%);
-}
+
 
 :root[data-theme='light'] .hero__proof-chip {
   background: var(--surface);
