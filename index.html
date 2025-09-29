@@ -123,34 +123,131 @@
     </section>
 
     <section id="sobre" class="section about" data-reveal>
-      <div class="container grid grid--2">
-        <div>
-          <h2>Sobre</h2>
-          <p>Sou dev júnior focado em criar componentes reutilizáveis, padronizar CRUDs com grids e modais, e entregar DX consistente para o squad. Transformo demandas confusas em fluxos previsíveis e mensuráveis.</p>
-          <p class="muted">No pessoal, estudo Supabase (Postgres + RLS), brinco com projetos Three.js para entender física/3D e treino leitura de sistemas em jogos táticos.</p>
-          <div class="about__now">
-            <h3>Hoje eu tô mexendo com</h3>
-            <ul class="chip-list">
-              <li class="chip" data-tooltip="Hooks específicos, TanStack Table e testes de integração">React/TypeScript</li>
-              <li class="chip" data-tooltip="Tokens, temas dinâmicos e componentes polidos">Styled-Components</li>
-              <li class="chip" data-tooltip="TanStack Table com colunas dinâmicas e filtros hora-only">TanStack React-Table</li>
-              <li class="chip" data-tooltip="Supabase com RLS, policies e SQL focado em finanças">Supabase</li>
-              <li class="chip" data-tooltip="Dashboards acessíveis e indicadores com foco em leitura">Recharts</li>
-              <li class="chip" data-tooltip="Fluxos CRUD críticos, toasts e combos">Cypress</li>
+      <div class="container about__grid">
+        <div class="about__column about__column--primary" data-reveal data-reveal-soft>
+          <h2 class="about__title">Sobre</h2>
+          <div class="about__block" aria-labelledby="quem-sou">
+            <h3 id="quem-sou" class="about__block-title">Quem sou</h3>
+            <p class="about__block-copy">Dev front-end júnior que padroniza CRUDs complexos e deixa dados legíveis em minutos. Entrego componentes testáveis e monitoráveis para squads que precisam escalar releases.</p>
+          </div>
+          <div class="about__block" aria-labelledby="stack-atual">
+            <h3 id="stack-atual" class="about__block-title">Hoje eu tô mexendo com</h3>
+            <ul class="about__chip-list" role="list">
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>React/TS</span>
+              </li>
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>Styled-Components</span>
+              </li>
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>TanStack Table</span>
+              </li>
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>Supabase</span>
+              </li>
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>Recharts</span>
+              </li>
+              <li class="about__chip" tabindex="0">
+                <span class="about__chip-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="8" /></svg>
+                </span>
+                <span>Cypress</span>
+              </li>
             </ul>
           </div>
+          <div class="about__timeline" aria-label="Linha do tempo 2024 a 2025">
+            <ol class="about__timeline-list" role="list">
+              <li class="about__timeline-item" data-reveal data-reveal-soft>
+                <span class="about__timeline-point" aria-hidden="true"></span>
+                <span class="about__timeline-year">2024</span>
+                <span class="about__timeline-label">Padrões de CRUD</span>
+              </li>
+              <li class="about__timeline-item" data-reveal data-reveal-soft>
+                <span class="about__timeline-point" aria-hidden="true"></span>
+                <span class="about__timeline-year">2024</span>
+                <span class="about__timeline-label">Lib de componentes</span>
+              </li>
+              <li class="about__timeline-item" data-reveal data-reveal-soft>
+                <span class="about__timeline-point" aria-hidden="true"></span>
+                <span class="about__timeline-year">2025</span>
+                <span class="about__timeline-label">Suíte E2E diária</span>
+              </li>
+            </ol>
+          </div>
         </div>
-        <div class="about__proof">
-          <h3>Provas reais</h3>
-          <ul>
-            <li><strong>Grid genérico</strong> para CRUD com filtros hora-only, clone e derivação.</li>
-            <li><strong>Modais dinâmicos</strong> que tratam Create/Update/Clone/Derivação com validação única.</li>
-            <li><strong>Suite Cypress</strong> cobrindo fluxos críticos com helpers reutilizáveis.</li>
-          </ul>
-          <div class="about__achievements">
-            <span class="badge">CRUDs padronizados</span>
-            <span class="badge">Menos retrabalho na squad</span>
-            <span class="badge">Releases com confiança</span>
+        <div class="about__column about__column--secondary" data-reveal data-reveal-soft>
+          <h2 class="about__title about__title--secondary">Provas reais</h2>
+          <div class="about__proof-grid">
+            <article class="proof-card" data-status="em produção">
+              <header class="proof-card__header">
+                <span class="proof-card__status">em produção</span>
+                <h3 class="proof-card__title">Grid Genérico</h3>
+              </header>
+              <p class="proof-card__description">CRUD com filtros hora-only, clone e derivação.</p>
+              <p class="proof-card__impact">
+                <span class="proof-card__impact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" focusable="false"><path d="M6.4 11.2 3.8 8.6l1.06-1.06L6.4 9.08l4.74-4.74L12.2 5.4z" /></svg>
+                </span>
+                <span>Impacto: –42% tempo p/ nova tela</span>
+              </p>
+              <ul class="proof-card__tags" role="list">
+                <li class="proof-card__tag">React</li>
+                <li class="proof-card__tag">TS</li>
+                <li class="proof-card__tag">TanStack Table</li>
+              </ul>
+              <a class="proof-card__link" href="#projetos">ver case</a>
+            </article>
+            <article class="proof-card" data-status="interno">
+              <header class="proof-card__header">
+                <span class="proof-card__status">interno</span>
+                <h3 class="proof-card__title">Modais Dinâmicos</h3>
+              </header>
+              <p class="proof-card__description">Create/Update/Clone/Derivação com validação única.</p>
+              <p class="proof-card__impact">
+                <span class="proof-card__impact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" focusable="false"><path d="M6.4 11.2 3.8 8.6l1.06-1.06L6.4 9.08l4.74-4.74L12.2 5.4z" /></svg>
+                </span>
+                <span>Impacto: –30% retrabalho</span>
+              </p>
+              <ul class="proof-card__tags" role="list">
+                <li class="proof-card__tag">Styled-Components</li>
+                <li class="proof-card__tag">Zod</li>
+              </ul>
+              <a class="proof-card__link" href="#projetos">ver case</a>
+            </article>
+            <article class="proof-card" data-status="em produção">
+              <header class="proof-card__header">
+                <span class="proof-card__status">em produção</span>
+                <h3 class="proof-card__title">Suíte Cypress</h3>
+              </header>
+              <p class="proof-card__description">Fluxos críticos com helpers reutilizáveis.</p>
+              <p class="proof-card__impact">
+                <span class="proof-card__impact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" focusable="false"><path d="M6.4 11.2 3.8 8.6l1.06-1.06L6.4 9.08l4.74-4.74L12.2 5.4z" /></svg>
+                </span>
+                <span>Impacto: +9pp cobertura E2E / MTTR –57%</span>
+              </p>
+              <ul class="proof-card__tags" role="list">
+                <li class="proof-card__tag">Cypress</li>
+              </ul>
+              <a class="proof-card__link" href="#projetos">ver case</a>
+            </article>
           </div>
         </div>
       </div>
