@@ -979,6 +979,20 @@ button:focus-visible,
   color: rgba(226, 232, 240, 0.9);
 }
 
+.proof-card__impact-copy {
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.proof-card__impact-label {
+  font-weight: 700;
+}
+
+.proof-card__impact-value {
+  font-weight: 600;
+}
+
 .proof-card__impact-icon {
   display: inline-flex;
   width: 20px;
@@ -2149,6 +2163,16 @@ button:focus-visible,
   color: var(--text-default);
 }
 
+:root[data-theme='light'] p {
+  color: var(--text-default);
+  opacity: 1;
+}
+
+:root[data-theme='light'] small {
+  color: var(--text-soft);
+  opacity: 1;
+}
+
 :root[data-theme='light'] .section h2,
 :root[data-theme='light'] h1,
 :root[data-theme='light'] h2,
@@ -2165,6 +2189,13 @@ button:focus-visible,
 :root[data-theme='light'] .education-card span,
 :root[data-theme='light'] .testimonials__subtitle {
   color: var(--text-muted);
+  opacity: 1;
+}
+
+:root[data-theme='light'] .eyebrow,
+:root[data-theme='light'] .hero__eyebrow {
+  color: var(--text-soft);
+  opacity: 1;
 }
 
 :root[data-theme='light'] .site-header {
@@ -2229,6 +2260,19 @@ button:focus-visible,
 }
 
 
+:root[data-theme='light'] .about__title,
+:root[data-theme='light'] .about__title--secondary,
+:root[data-theme='light'] .about__block-title {
+  color: var(--text-strong);
+}
+
+:root[data-theme='light'] .about__block-copy {
+  color: var(--text-default);
+}
+
+:root[data-theme='light'] .about__chip span:last-child {
+  color: var(--text-default);
+}
 
 :root[data-theme='light'] .hero__proof-chip {
   background: var(--surface);
@@ -2297,6 +2341,7 @@ button:focus-visible,
   background: var(--neutral-100);
   border: 1px solid var(--border-subtle);
   color: var(--text-default);
+  opacity: 1;
 }
 
 :root[data-theme='light'] .badge--accent {
@@ -2373,7 +2418,7 @@ button:focus-visible,
 :root[data-theme='light'] .proof-card[data-status='interno'] .proof-card__status {
   background: var(--neutral-100);
   border-color: var(--border);
-  color: var(--text-muted);
+  color: var(--text-default);
 }
 
 :root[data-theme='light'] .proof-card[data-status='interno'] .proof-card__status::before {
@@ -2386,16 +2431,26 @@ button:focus-visible,
 }
 
 :root[data-theme='light'] .proof-card__description {
-  color: var(--text-muted);
+  color: var(--text-default);
+  opacity: 1;
 }
 
 :root[data-theme='light'] .proof-card__impact {
-  color: var(--text-default);
+  color: var(--text-strong);
+  opacity: 1;
 }
 
 :root[data-theme='light'] .proof-card__impact-icon {
   background: var(--success-soft);
   border-color: var(--success-strong);
+}
+
+:root[data-theme='light'] .proof-card__impact-label {
+  color: var(--text-strong);
+}
+
+:root[data-theme='light'] .proof-card__impact-value {
+  color: var(--text-default);
 }
 
 :root[data-theme='light'] .proof-card__impact-icon svg {
@@ -2405,7 +2460,7 @@ button:focus-visible,
 :root[data-theme='light'] .proof-card__tag {
   background: var(--neutral-100);
   border-color: var(--border-subtle);
-  color: var(--text-soft);
+  color: var(--text-muted);
 }
 
 :root[data-theme='light'] .proof-card__link {
