@@ -34,13 +34,16 @@ const navLinks = document.querySelector('.nav__links');
 
 navToggle?.addEventListener('click', () => {
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-  navToggle.setAttribute('aria-expanded', String(!expanded));
-  navLinks?.classList.toggle('is-open');
+  const nextExpanded = !expanded;
+  navToggle.setAttribute('aria-expanded', String(nextExpanded));
+  navToggle.setAttribute('aria-label', nextExpanded ? 'Fechar menu' : 'Abrir menu');
+  navLinks?.classList.toggle('is-open', nextExpanded);
 });
 
 navLinks?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
     navToggle?.setAttribute('aria-expanded', 'false');
+    navToggle?.setAttribute('aria-label', 'Abrir menu');
     navLinks.classList.remove('is-open');
   });
 });

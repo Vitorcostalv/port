@@ -46,7 +46,7 @@
     <div class="container">
       <nav class="nav">
         <a href="#hero" class="brand" aria-label="Vitor Costa">VC</a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+        <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
           <span class="nav-toggle__line"></span>
           <span class="nav-toggle__line"></span>
         </button>
@@ -75,12 +75,12 @@
       <div class="hero__grain" aria-hidden="true"></div>
       <div class="container hero__content">
         <div class="hero__column hero__column--text">
-          <p class="hero__tagline">Vitor Costa — disponível para desafios 2025</p>
+          <p class="hero__tagline">Vitor Costa — disponível para desafios 2026</p>
           <h1 class="hero__title">
             Dev Front-end (React/TS) —
             <span class="hero__title-highlight">UI e DX</span>
           </h1>
-          <p class="hero__subtitle">componentização, CRUDs padronizados, Supabase com RLS, suíte E2E</p>
+          <p class="hero__subtitle">Construo interfaces que o time consegue manter, evoluir e testar com segurança.</p>
           <div class="hero__actions">
             <a class="btn btn--primary hero__action" href="#projetos" data-ripple>Ver projetos</a>
             <a class="btn btn--secondary hero__action" href="./assets/Curriculo.pdf" download data-ripple>Baixar CV</a>
@@ -109,14 +109,14 @@
             <div class="hero__profile-glow" aria-hidden="true"></div>
             <div class="hero__profile-surface hero__parallax-layer" data-depth="1.2">
               <div class="hero__profile-frame">
-                <img class="hero__profile-image" src="assets/perfilpixel.png" alt="Retrato pixel-art de Vitor Costa" loading="lazy" decoding="async" />
+                <img class="hero__profile-image" src="assets/Perfil_foto.png" alt="Retrato de Vitor Costa" loading="lazy" decoding="async" />
               </div>
             </div>
             <div class="hero__profile-badge hero__parallax-layer" data-depth="2.4">
               <span class="hero__profile-name">Vitor Costa</span>
-              <span class="hero__profile-role">Dev • Gamer</span>
+              <span class="hero__profile-role">Front-end React/TS</span>
             </div>
-            <figcaption id="hero-visual-caption" class="sr-only">Retrato pixel-art de Vitor Costa com borda gradiente azul e roxa.</figcaption>
+            <figcaption id="hero-visual-caption" class="sr-only">Retrato de Vitor Costa com borda gradiente azul e roxa.</figcaption>
           </figure>
         </div>
       </div>
@@ -263,9 +263,9 @@
         <aside class="stack__panel" aria-live="polite">
           <h3>Como uso na prática</h3>
           <p class="stack__details muted">Selecione uma skill para ver contexto.</p>
-          <div class="stack__gamer">
-            <h4>Badge + Gamer</h4>
-            <p>Favoritos: Baldur's Gate 3, Mass Effect Legendary, Into the Breach. Servem para treinar leitura de sistemas, antecipar exceções e criar UIs claras para decisões rápidas.</p>
+          <div class="stack__note">
+            <h4>Foco profissional</h4>
+            <p>Priorizo componentes previsíveis, estados claros, testes E2E e documentação suficiente para outro dev continuar o fluxo sem depender de contexto informal.</p>
           </div>
         </aside>
       </div>
@@ -510,7 +510,7 @@
             <div class="results-panel__header">
               <div>
                 <h3>Tempo de criação de telas</h3>
-                <p class="results-panel__subtitle">Comparativo Antes vs Depois com linha de P95.</p>
+                <p class="results-panel__subtitle">Estimativa interna antes/depois da padronização, com linha de P95.</p>
               </div>
               <div class="results-panel__tabs" role="tablist" aria-label="Intervalo analisado">
                 <button class="results-tab is-active" role="tab" aria-selected="true" id="tempo-tab-30" data-range="30d">
@@ -664,7 +664,7 @@
             <div class="results-panel__header">
               <div>
                 <h3>Redução de bugs críticos</h3>
-                <p class="results-panel__subtitle">Queda trimestral sustentada após automatizar fluxos-chave.</p>
+                <p class="results-panel__subtitle">Indicador interno dos fluxos cobertos após automatizar testes-chave.</p>
               </div>
             </div>
 
@@ -717,66 +717,7 @@
               </g>
             </svg>
 
-            <p class="results-panel__footnote">Suite Cypress roda diariamente e derruba regressões antes do deploy.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="depoimentos" class="section section--testimonials" data-reveal>
-      <div class="container">
-        <div class="testimonials__header">
-          <h2 class="testimonials__title">Depoimentos</h2>
-          <p class="testimonials__subtitle">Aprendizado contínuo + voz de quem trabalhou comigo.</p>
-        </div>
-        <div class="testimonials__grid">
-          <article class="testimonial-card">
-            <span class="testimonial-card__accent" aria-hidden="true"></span>
-            <div class="testimonial-card__top">
-              <div class="testimonial-card__identity">
-                <span class="testimonial-card__avatar" aria-hidden="true">LA</span>
-                <div>
-                  <p class="testimonial-card__name">Marcos vinicios</p>
-                  <p class="testimonial-card__role">Product Manager</p>
-                </div>
-              </div>
-              <div class="testimonial-card__rating" aria-label="5 de 5 estrelas">
-                <span>★★★★</span>
-              </div>
-            </div>
-            <p class="testimonial-card__quote">“O Vitor transformou nosso CRUD caótico em algo previsível. Os grids e testes E2E reduziram retrabalho em semanas.”</p>
-          </article>
-          <article class="testimonial-card">
-            <span class="testimonial-card__accent" aria-hidden="true"></span>
-            <div class="testimonial-card__top">
-              <div class="testimonial-card__identity">
-                <span class="testimonial-card__avatar" aria-hidden="true">MC</span>
-                <div>
-                  <p class="testimonial-card__name">Marina Costa</p>
-                  <p class="testimonial-card__role">Engenheira de Software</p>
-                </div>
-              </div>
-              <div class="testimonial-card__rating" aria-label="5 de 5 estrelas">
-                <span>★★★★★</span>
-              </div>
-            </div>
-            <p class="testimonial-card__quote">“Parceria cirúrgica: componentes reutilizáveis, documentação clara e entregas no prazo.”</p>
-          </article>
-          <article class="testimonial-card">
-            <span class="testimonial-card__accent" aria-hidden="true"></span>
-            <div class="testimonial-card__top">
-              <div class="testimonial-card__identity">
-                <span class="testimonial-card__avatar" aria-hidden="true">RG</span>
-                <div>
-                  <p class="testimonial-card__name">Rafael Gomes</p>
-                  <p class="testimonial-card__role">CTO</p>
-                </div>
-              </div>
-              <div class="testimonial-card__rating" aria-label="5 de 5 estrelas">
-                <span>★★★★</span>
-              </div>
-            </div>
-            <p class="testimonial-card__quote">“O dashboard ficou leve e rápido. Observabilidade e rollout sem susto.”</p>
+            <p class="results-panel__footnote">Indicador acompanhado em regressões dos fluxos cobertos pela suíte Cypress interna.</p>
           </article>
         </div>
       </div>
@@ -797,13 +738,12 @@
             <img src="assets/cv-qr.svg" alt="QR Code para baixar o CV" loading="lazy" decoding="async" />
           </div>
         </div>
-        <div class="contact__roadmap">
-          <h3>Changelog / Roadmap</h3>
+        <div class="contact__availability">
+          <h3>Disponibilidade</h3>
           <ul>
-            <li><span class="tag">Jun 2025</span> v1.0 lançado com cases completos e tema dinâmico.</li>
-            <li><span class="tag">Jul 2025</span> Integração de métricas animadas e changelog vivo.</li>
-            <li><span class="tag">Ago 2025</span> Certificados extras + depoimentos curtos.</li>
-            <li><span class="tag">Out 2025</span> Página /case estática detalhada.</li>
+            <li><span class="tag">2026</span> Aberto a vagas front-end júnior/pleno inicial e projetos React/TypeScript.</li>
+            <li><span class="tag">Remoto</span> Preferência por times com rotina assíncrona, documentação e revisão de código.</li>
+            <li><span class="tag">Foco</span> Interfaces internas, CRUDs complexos, dashboards e cobertura E2E.</li>
           </ul>
         </div>
       </div>
@@ -812,7 +752,7 @@
 
   <footer class="site-footer">
     <div class="container footer__inner">
-      <p>Feito em HTML/CSS/JS — 100% estático.</p>
+      <p>Portfólio estático. Stack de trabalho: React/TypeScript.</p>
       <p>© <span id="year"></span> Vitor Costa.</p>
     </div>
   </footer>
