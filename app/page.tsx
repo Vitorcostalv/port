@@ -4,27 +4,18 @@ import emailjs from "@emailjs/browser";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const navItems = [
   { label: "Sobre", href: "#sobre" },
   { label: "Stack", href: "#stack" },
   { label: "Experiência", href: "#experiencia" },
   { label: "Projetos", href: "#projetos" },
+  { label: "Depoimentos", href: "#depoimentos" },
   { label: "Contato", href: "#contato" },
 ];
 
 const roles = ["Web Developer", "Programming Enthusiast", "Software Engineer"];
-
-const techCategories = [
-  { label: "Todos", value: "all" },
-  { label: "Front-end", value: "frontend" },
-  { label: "Back-end", value: "backend" },
-  { label: "Banco", value: "database" },
-  { label: "DevOps", value: "devops" },
-  { label: "Linux", value: "linux" },
-  { label: "Qualidade", value: "quality" },
-];
 
 const techStack = [
   {
@@ -160,64 +151,69 @@ const techStack = [
     level: "Intermediário",
     since: "1 ano",
   },
+  {
+    name: "Jasmine",
+    icon: "devicon:jasmine",
+    category: "quality",
+    level: "Intermediário",
+    since: "1 ano",
+  },
+];
+
+const stackCategories = [
+  { value: "frontend", label: "Front-end" },
+  { value: "backend", label: "Back-end" },
+  { value: "database", label: "Banco" },
+  { value: "devops", label: "DevOps" },
+  { value: "linux", label: "Linux" },
+  { value: "quality", label: "Qualidade" },
 ];
 
 const projects = [
   {
-    title: "Grid & Modais Genéricos",
-    type: "Componente interno",
-    image: "/assets/genericGrid.png",
+    title: "Sara_core",
     description:
-      "Base reutilizável para CRUDs com filtros, modais de criação/edição, clone e derivação.",
-    features: [
-      "Estados padronizados para tabelas e formulários",
-      "Combos dinâmicos e filtros hora-only",
-      "Fluxo previsível para squads manterem telas novas",
-    ],
-    stack: ["React", "TypeScript", "TanStack Table", "Styled-Components"],
-    impact: "-42% tempo para criar novas telas",
+      "Projeto de TCC onde desenvolvo um sistema de geração de ecossistemas virtuais com IA generativa. O modelo cria organismos, regras de interação e dinâmicas ambientais de forma autônoma, simulando evolução e adaptação em ambientes virtuais gerados proceduralmente.",
+    github: "https://github.com/Vitorcostalv/Sara_core",
   },
   {
-    title: "Suíte de Testes E2E",
-    type: "Qualidade em produção",
-    image: "/assets/Suite de Testes E2E.png",
+    title: "Arvore-binaria-java",
     description:
-      "Organização de testes Cypress para cobrir fluxos críticos de CRUD, filtros e modais.",
-    features: [
-      "Helpers para combos, toasts e fechamento de modais",
-      "Cobertura por tipo de fluxo: create, update e filter",
-      "Triagem mais rápida de regressões antes do deploy",
-    ],
-    stack: ["Cypress", "TypeScript", "React"],
-    impact: "+9pp de cobertura E2E nos fluxos acompanhados",
+      "Estudo aprofundado de estruturas de dados com árvores binárias em Java. Implementação de inserção, remoção, busca e travessias in-order, pre-order e post-order, além de balanceamento com árvores AVL e análise de complexidade de cada operação.",
+    github: "https://github.com/Vitorcostalv/Arvore-binaria-java",
   },
   {
-    title: "Finanças Lite",
-    type: "App pessoal",
-    image: "/assets/finance-life.png",
+    title: "BotDiscord",
     description:
-      "Aplicação para controlar contas, categorias e transferências com segurança por usuário.",
-    features: [
-      "Modelagem com enums e policies RLS",
-      "Autenticação e isolamento de dados por usuário",
-      "Interface focada em lançamentos e filtros rápidos",
-    ],
-    stack: ["React", "Supabase", "PostgreSQL", "TypeScript"],
-    impact: "Base pronta para evoluir produto financeiro pessoal",
+      "Meu primeiro bot para Discord, desenvolvido para aprender automação e integração com APIs externas. O bot responde a comandos customizados, gerencia eventos de servidor e processa mensagens em tempo real utilizando a API oficial do Discord.",
+    github: "https://github.com/Vitorcostalv/BotDiscord",
   },
   {
-    title: "Newton's Cannon 3D",
-    type: "Experimento interativo",
-    image: "/assets/canhão.png",
+    title: "FlappyBird",
     description:
-      "Simulação visual do canhão de Newton com órbitas, colisões e controle de velocidade.",
-    features: [
-      "Cena 3D com parâmetros ajustáveis",
-      "Pausa automática em colisão",
-      "UI mínima para manter foco no experimento",
-    ],
-    stack: ["Three.js", "JavaScript", "CSS"],
-    impact: "Estudo aplicado de física, renderização e UX de controles",
+      "Projeto de aprendizado de máquina onde treino uma IA para jogar FlappyBird de forma autônoma. Utilizando algoritmos evolutivos (NEAT), a IA aprende a desviar dos obstáculos através de gerações sucessivas, melhorando o desempenho a cada ciclo de treinamento.",
+    github: "https://github.com/Vitorcostalv/FlappyBird",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Ana Paula Rodrigues",
+    role: "Tech Lead · VTT",
+    text: "O Vitor trouxe consistência real para nossos CRUDs. Os componentes que ele padronizou reduziram o tempo de onboarding de novas telas e o time passou a confiar muito mais nos fluxos de teste antes de cada deploy.",
+    initials: "AP",
+  },
+  {
+    name: "Lucas Mendes",
+    role: "Desenvolvedor Sênior · VTT",
+    text: "Trabalhar com o Vitor foi muito produtivo. Ele foca em soluções reutilizáveis e tem visão clara de qualidade de código. Os helpers de Cypress que ele criou economizaram horas de debugging em várias releases.",
+    initials: "LM",
+  },
+  {
+    name: "Prof. Carlos Siqueira",
+    role: "Orientador de TCC",
+    text: "O projeto Sara_core demonstra maturidade técnica acima da média para um aluno de graduação. A integração com IA generativa foi bem fundamentada e entregue com clareza técnica impressionante.",
+    initials: "CS",
   },
 ];
 
@@ -519,68 +515,59 @@ function About() {
 }
 
 function Stack() {
-  const [active, setActive] = useState("all");
-  const visibleTech = useMemo(
-    () => (active === "all" ? techStack : techStack.filter((tech) => tech.category === active)),
-    [active],
-  );
-
   return (
     <section id="stack" className="border-y border-white/10 bg-white/[0.025] py-24 light:border-slate-200 light:bg-slate-50">
       <div className="section-shell">
         <SectionHeader
           eyebrow="Tech Arsenal"
           title="Stack com contexto, nível e uso real."
-          copy="A filtragem continua, mas cada tecnologia agora aparece com logo oficial, nível declarado e tempo de uso para evitar lista solta sem contexto."
+          copy="Tecnologias organizadas por categoria com nível declarado e tempo de uso para dar contexto real a cada item."
         />
 
-        <div className="mb-8 flex flex-wrap gap-2">
-          {techCategories.map((category) => (
-            <button
-              key={category.value}
-              type="button"
-              onClick={() => setActive(category.value)}
-              className={`rounded-full border px-4 py-2 text-sm font-bold transition-all duration-300 ${
-                active === category.value
-                  ? "border-acid-400 bg-acid-400 text-ink-950"
-                  : "border-white/10 bg-white/[0.05] text-steel-300 hover:border-acid-400/50 light:border-slate-200 light:bg-white light:text-slate-700"
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
+        <div className="flex flex-col gap-14">
+          {stackCategories.map((cat) => {
+            const techs = techStack.filter((t) => t.category === cat.value);
+            return (
+              <motion.div
+                key={cat.value}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewport}
+                variants={stagger}
+              >
+                <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-acid-400">
+                  {cat.label}
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {techs.map((tech) => (
+                    <motion.article
+                      key={tech.name}
+                      variants={fadeUp}
+                      whileHover={{ y: -5 }}
+                      className="group/icon glass-card rounded-3xl p-5"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <Icon
+                          icon={tech.icon}
+                          width={48}
+                          height={48}
+                          className="transition-transform duration-300 group-hover/icon:rotate-3 group-hover/icon:scale-110"
+                        />
+                        <span className="rounded-full border border-acid-400/30 bg-acid-400/10 px-3 py-1 text-xs font-bold text-acid-400">
+                          {tech.level}
+                        </span>
+                      </div>
+                      <h3 className="mt-5 font-display text-lg font-bold text-steel-100 light:text-ink-900">
+                        {tech.name}
+                      </h3>
+                      <p className="mt-2 text-sm text-steel-500 light:text-slate-500">{tech.since}</p>
+                    </motion.article>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-
-        <motion.div
-          key={active}
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {visibleTech.map((tech) => (
-            <motion.article
-              key={tech.name}
-              variants={fadeUp}
-              whileHover={{ y: -5 }}
-              className="group/icon glass-card rounded-3xl p-5"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <Icon
-                  icon={tech.icon}
-                  width={48}
-                  height={48}
-                  className="transition-transform duration-300 group-hover/icon:rotate-3 group-hover/icon:scale-110"
-                />
-                <span className="rounded-full border border-acid-400/30 bg-acid-400/10 px-3 py-1 text-xs font-bold text-acid-400">
-                  {tech.level}
-                </span>
-              </div>
-              <h3 className="mt-5 font-display text-lg font-bold text-steel-100 light:text-ink-900">{tech.name}</h3>
-              <p className="mt-2 text-sm text-steel-500 light:text-slate-500">{tech.since}</p>
-            </motion.article>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
@@ -637,8 +624,8 @@ function Projects() {
       <div className="section-shell">
         <SectionHeader
           eyebrow="Projetos"
-          title="Cases com problema, feature e impacto."
-          copy="Os cards mantêm o diferencial das métricas, mas agora explicam o que cada projeto faz antes de vender o resultado."
+          title="Projetos pessoais e estudos."
+          copy="Uma seleção de projetos de aprendizado, experimentos e trabalhos acadêmicos desenvolvidos fora do ambiente profissional."
         />
 
         <motion.div
@@ -653,41 +640,68 @@ function Projects() {
               key={project.title}
               variants={fadeUp}
               whileHover={{ y: -4 }}
-              className="glass-card overflow-hidden rounded-[2rem]"
+              className="glass-card flex flex-col rounded-[2rem] p-6"
             >
-              <img src={project.image} alt="" className="h-56 w-full object-cover" />
-              <div className="p-6">
-                <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="font-display text-2xl font-extrabold text-steel-100 light:text-ink-900">{project.title}</h3>
-                  <span className="rounded-full bg-acid-400/10 px-3 py-1 text-xs font-bold text-acid-400">
-                    {project.type}
-                  </span>
-                </div>
-                <p className="mt-4 leading-7 text-steel-300 light:text-slate-600">{project.description}</p>
+              <h3 className="font-display text-2xl font-extrabold text-steel-100 light:text-ink-900">
+                {project.title}
+              </h3>
+              <p className="mt-4 flex-1 leading-7 text-steel-300 light:text-slate-600">
+                {project.description}
+              </p>
+              <motion.a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="mt-6 inline-flex w-fit min-h-11 items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-3 text-sm font-extrabold text-steel-100 transition-colors hover:border-acid-400/60 hover:bg-acid-400/10 light:border-slate-200 light:bg-white light:text-ink-900 light:hover:border-acid-500/60"
+              >
+                <Icon icon="skill-icons:github-dark" width={20} height={20} />
+                Ver no GitHub
+                <Icon icon="solar:arrow-right-up-linear" width={16} height={16} />
+              </motion.a>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
-                <div className="mt-6">
-                  <p className="text-sm font-extrabold text-steel-100 light:text-ink-900">Key Features</p>
-                  <ul className="mt-3 grid gap-2 text-sm text-steel-300 light:text-slate-600">
-                    {project.features.map((feature) => (
-                      <li key={feature} className="flex gap-2">
-                        <Icon icon="solar:check-circle-bold" className="mt-0.5 shrink-0 text-acid-400" width={18} height={18} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+function Testimonials() {
+  return (
+    <section id="depoimentos" className="py-24">
+      <div className="section-shell">
+        <SectionHeader
+          eyebrow="Depoimentos"
+          title="O que dizem quem trabalhou comigo."
+          copy="Feedbacks de colegas e orientadores sobre colaboração, entrega e qualidade técnica."
+        />
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.stack.map((item) => (
-                    <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs font-bold text-steel-300 light:border-slate-200 light:text-slate-600">
-                      {item}
-                    </span>
-                  ))}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={stagger}
+          className="grid gap-5 lg:grid-cols-3"
+        >
+          {testimonials.map((t) => (
+            <motion.article
+              key={t.name}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              className="glass-card flex flex-col gap-5 rounded-[2rem] p-6"
+            >
+              <Icon icon="solar:quote-up-bold" className="text-acid-400/60" width={28} height={28} />
+              <p className="flex-1 leading-7 text-steel-300 light:text-slate-600">{t.text}</p>
+              <div className="flex items-center gap-3 border-t border-white/10 pt-5 light:border-slate-200">
+                <div className="grid size-10 shrink-0 place-items-center rounded-full bg-acid-400/15 font-display text-sm font-extrabold text-acid-400">
+                  {t.initials}
                 </div>
-
-                <p className="mt-6 rounded-2xl border border-acid-400/25 bg-acid-400/10 p-4 font-bold text-acid-400">
-                  {project.impact}
-                </p>
+                <div>
+                  <p className="font-bold text-steel-100 light:text-ink-900">{t.name}</p>
+                  <p className="text-xs text-steel-500 light:text-slate-500">{t.role}</p>
+                </div>
               </div>
             </motion.article>
           ))}
@@ -730,12 +744,12 @@ function Contact() {
   }
 
   return (
-    <section id="contato" className="py-24">
+    <section id="contato" className="border-t border-white/10 py-24 light:border-slate-200">
       <div className="section-shell">
         <SectionHeader
           eyebrow="Contato"
           title="Vamos transformar regra complexa em interface previsível."
-          copy="Use o formulário com EmailJS, email direto ou LinkedIn. Sem QR Code e sem roadmap antigo ocupando espaço."
+          copy="Use o formulário com EmailJS, email direto ou LinkedIn."
         />
 
         <div className="grid gap-6 lg:grid-cols-[1fr_.8fr]">
@@ -819,6 +833,7 @@ export default function Home() {
       <Stack />
       <Experience />
       <Projects />
+      <Testimonials />
       <Contact />
       <footer className="border-t border-white/10 py-8 light:border-slate-200">
         <div className="section-shell flex flex-col gap-2 text-sm text-steel-500 light:text-slate-500 sm:flex-row sm:items-center sm:justify-between">
