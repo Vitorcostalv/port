@@ -15,7 +15,7 @@ const navItems = [
   { label: "Contato", href: "#contato" },
 ];
 
-const roles = ["Web Developer", "Programming Enthusiast", "Software Engineer"];
+const roles = ["Fullstack Developer", "Software Engineer", "Programming Enthusiast"];
 
 const techStack = [
   {
@@ -51,28 +51,28 @@ const techStack = [
     icon: "devicon:vuejs",
     category: "frontend",
     level: "Iniciante",
-    since: "estudo",
+    since: "1 ano",
   },
   {
     name: "Laravel",
     icon: "devicon:laravel",
     category: "backend",
     level: "Iniciante",
-    since: "estudo",
+    since: "2 anos",
   },
   {
     name: "Django",
     icon: "material-icon-theme:django",
     category: "backend",
     level: "Iniciante",
-    since: "estudo",
+    since: "1 ano",
   },
   {
     name: "Java",
     icon: "devicon:java",
     category: "backend",
     level: "Iniciante",
-    since: "estudo",
+    since: "2 anos",
   },
   {
     name: "Go",
@@ -86,28 +86,28 @@ const techStack = [
     icon: "devicon:nodejs",
     category: "backend",
     level: "Intermediário",
-    since: "1 ano",
+    since: "2 anos",
   },
   {
     name: "NestJS",
     icon: "devicon:nestjs",
     category: "backend",
     level: "Iniciante",
-    since: "estudo",
+    since: "2 anos",
   },
   {
     name: "PostgreSQL",
     icon: "logos:postgresql",
     category: "database",
     level: "Intermediário",
-    since: "1 ano",
+    since: "2 anos",
   },
   {
     name: "MySQL",
     icon: "devicon:mysql",
     category: "database",
     level: "Intermediário",
-    since: "1 ano",
+    since: "2 anos",
   },
   {
     name: "Firebase",
@@ -128,21 +128,21 @@ const techStack = [
     icon: "devicon:docker",
     category: "devops",
     level: "Iniciante",
-    since: "estudo",
+    since: "1 ano",
   },
   {
     name: "Ubuntu",
     icon: "devicon:ubuntu",
     category: "linux",
     level: "Intermediário",
-    since: "uso diário",
+    since: "1 ano",
   },
   {
     name: "Debian",
     icon: "devicon:debian",
     category: "linux",
     level: "Iniciante",
-    since: "estudo",
+    since: "uso diário",
   },
   {
     name: "Cypress",
@@ -173,25 +173,25 @@ const projects = [
   {
     title: "Sara_core",
     description:
-      "Projeto de TCC onde desenvolvo um sistema de geração de ecossistemas virtuais com IA generativa. O modelo cria organismos, regras de interação e dinâmicas ambientais de forma autônoma, simulando evolução e adaptação em ambientes virtuais gerados proceduralmente.",
+      "TCC fullstack solo: pipeline de voz (Vosk PT-BR → Gemini/Grok → síntese) com grounding em PostgreSQL e política anti-injeção no system prompt. Motor de ecossistema procedural com classificação climática (Köppen), árvores de comportamento para fauna e visualização 3D em tempo real via Three.js — ciclo dia/noite, chuva, milhares de agentes instanciados. TypeScript monorepo (Node/Express + React 18), observabilidade com Pino.",
     github: "https://github.com/Vitorcostalv/Sara_core",
   },
   {
     title: "Arvore-binaria-java",
     description:
-      "Estudo aprofundado de estruturas de dados com árvores binárias em Java. Implementação de inserção, remoção, busca e travessias in-order, pre-order e post-order, além de balanceamento com árvores AVL e análise de complexidade de cada operação.",
+      "Sistema bancário em Java com Árvore Binária de Busca (BST) como estrutura central — contas armazenadas e recuperadas em O(log n), com inserção, remoção e travessias in/pre/post-order. Projeto funcional com menu interativo via terminal.",
     github: "https://github.com/Vitorcostalv/Arvore-binaria-java",
   },
   {
     title: "BotDiscord",
     description:
-      "Meu primeiro bot para Discord, desenvolvido para aprender automação e integração com APIs externas. O bot responde a comandos customizados, gerencia eventos de servidor e processa mensagens em tempo real utilizando a API oficial do Discord.",
+      "Bot de Discord em TypeScript com roteamento inteligente entre 3 provedores de LLM (Gemini, Groq, Poe) — fallback automático em rate limit e cache por hash SHA-256. Recomendações de jogos e filmes com PRNG determinístico que nunca repete sugestões já avaliadas. Inclui perfis com XP, conquistas, cards de perfil gerados em PNG via canvas e ranking de reviews por servidor. Persistência em SQLite com migrations, deploy no Railway.",
     github: "https://github.com/Vitorcostalv/BotDiscord",
   },
   {
     title: "FlappyBird",
     description:
-      "Projeto de aprendizado de máquina onde treino uma IA para jogar FlappyBird de forma autônoma. Utilizando algoritmos evolutivos (NEAT), a IA aprende a desviar dos obstáculos através de gerações sucessivas, melhorando o desempenho a cada ciclo de treinamento.",
+      "Flappy Bird com IA que aprende a jogar via NEAT — algoritmo que evolui pesos e topologia da rede neural sem arquitetura pré-definida. 100 agentes treinam em paralelo por geração com função de fitness de três sinais: +0.1 por frame sobrevivido, +5 por cano ultrapassado, −1 por colisão. Entradas da rede: posição Y do pássaro e distâncias até a abertura do próximo obstáculo. Colisão por pixel-perfect masking. Suporta modo humano e modo IA com indicador de geração em tela. Python · Pygame · NEAT-Python.",
     github: "https://github.com/Vitorcostalv/FlappyBird",
   },
 ];
@@ -365,7 +365,7 @@ function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-acid-400 opacity-70" />
               <span className="relative inline-flex size-2.5 rounded-full bg-acid-400" />
             </span>
-            Disponível para desafios 2026
+            Disponível para novas oportunidades
           </motion.div>
 
           <motion.p variants={fadeUp} className="mt-8 text-sm font-bold uppercase tracking-[0.3em] text-steel-300 light:text-slate-500">
@@ -383,13 +383,13 @@ function Hero() {
             variants={fadeUp}
             className="mt-7 max-w-2xl text-xl leading-8 text-steel-300 light:text-slate-600"
           >
-            Front-end developer que transforma CRUDs complexos em interfaces previsíveis,
-            testáveis e fáceis de manter.
+            Desenvolvo sistemas completos, do banco de dados à interface — com foco em
+            componentes reutilizáveis, APIs bem estruturadas e qualidade testável.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
             <MotionLink href="https://github.com/Vitorcostalv" label="GitHub" icon="skill-icons:github-dark" />
-            <MotionLink href="https://www.linkedin.com/in/vitor-costa-b177a5312/" label="LinkedIn" icon="skill-icons:linkedin" />
+            <MotionLink href="https://www.linkedin.com/in/vitorcostalv/" label="LinkedIn" icon="skill-icons:linkedin" />
             <MotionLink href="/assets/Curriculo.pdf" label="Baixar CV" icon="solar:download-bold" download />
           </motion.div>
         </motion.div>
@@ -487,7 +487,7 @@ function About() {
         <SectionHeader
           eyebrow="Sobre"
           title="Interface boa é aquela que continua clara depois do deploy."
-          copy="Meu foco é construir telas internas que diminuem retrabalho: componentes previsíveis, estados legíveis, testes de fluxo e documentação suficiente para o time seguir evoluindo."
+          copy="Comecei a programar por curiosidade — queria entender como as coisas funcionam por baixo. Hoje o que me motiva é construir sistemas que o time consegue evoluir sem medo: do banco de dados à tela, com componentes previsíveis, estados legíveis e testes que protegem os fluxos críticos."
         />
 
         <motion.div
@@ -603,13 +603,13 @@ function Experience() {
           </div>
           <ul className="mt-7 grid gap-4 text-steel-300 light:text-slate-600 md:grid-cols-3">
             <li className="rounded-2xl bg-white/[0.04] p-4 light:bg-slate-50">
-              Padronização de CRUDs com grid e modais reutilizáveis.
+              Desenvolvi a Luna — IA integrada ao novo portal VTT responsável por auxiliar cadastros, responder dúvidas operacionais e atuar como assistente principal dos usuários dentro da plataforma.
             </li>
             <li className="rounded-2xl bg-white/[0.04] p-4 light:bg-slate-50">
-              Estruturação de testes E2E com helpers para fluxos recorrentes.
+              Condução da manutenção e refatoração do sistema de analytics da empresa, modernizando a base de código, eliminando dívidas técnicas e garantindo maior confiabilidade dos dados reportados.
             </li>
             <li className="rounded-2xl bg-white/[0.04] p-4 light:bg-slate-50">
-              Apoio em dashboards e componentes para manter consistência visual.
+              Desenvolvimento de suítes de testes automatizados com Cypress e Jasmine, cobrindo fluxos críticos da aplicação e estabelecendo uma base sólida de qualidade contínua para o time.
             </li>
           </ul>
         </motion.article>
@@ -798,7 +798,7 @@ function Contact() {
           >
             {[
               ["Email direto", "VitorCostalv@proton.me", "mailto:VitorCostalv@proton.me", "solar:letter-bold"],
-              ["LinkedIn", "vitor-costa-b177a5312", "https://www.linkedin.com/in/vitor-costa-b177a5312/", "skill-icons:linkedin"],
+              ["LinkedIn", "vitorcostalv", "https://www.linkedin.com/in/vitorcostalv/", "skill-icons:linkedin"],
               ["GitHub", "Vitorcostalv", "https://github.com/Vitorcostalv", "skill-icons:github-dark"],
             ].map(([title, value, href, icon]) => (
               <motion.a
