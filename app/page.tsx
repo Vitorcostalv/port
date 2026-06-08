@@ -22,8 +22,8 @@ const techStack = [
     name: "React",
     icon: "skill-icons:react-dark",
     category: "frontend",
-    level: "Intermediário",
-    since: "2 anos",
+    level: "Avançado",
+    since: "3 anos",
   },
   {
     name: "Next.js",
@@ -36,15 +36,15 @@ const techStack = [
     name: "Tailwind CSS",
     icon: "logos:tailwindcss-icon",
     category: "frontend",
-    level: "Intermediário",
+    level: "Avançado",
     since: "1 ano",
   },
   {
     name: "TypeScript",
     icon: "skill-icons:typescript",
     category: "frontend",
-    level: "Intermediário",
-    since: "2 anos",
+    level: "Avançado",
+    since: "3 anos",
   },
   {
     name: "Vue.js",
@@ -71,7 +71,7 @@ const techStack = [
     name: "Java",
     icon: "devicon:java",
     category: "backend",
-    level: "Iniciante",
+    level: "Intermediário",
     since: "2 anos",
   },
   {
@@ -85,8 +85,8 @@ const techStack = [
     name: "Node.js",
     icon: "devicon:nodejs",
     category: "backend",
-    level: "Intermediário",
-    since: "2 anos",
+    level: "Avançado",
+    since: "3 anos",
   },
   {
     name: "NestJS",
@@ -141,15 +141,15 @@ const techStack = [
     name: "Debian",
     icon: "devicon:debian",
     category: "linux",
-    level: "Iniciante",
+    level: "Intermediário",
     since: "uso diário",
   },
   {
     name: "Cypress",
     icon: "skill-icons:cypress-dark",
     category: "quality",
-    level: "Intermediário",
-    since: "1 ano",
+    level: "Avançado",
+    since: "2 anos",
   },
   {
     name: "Jasmine",
@@ -200,28 +200,23 @@ const testimonials = [
   {
     name: "Ana Paula Rodrigues",
     role: "Tech Lead · VTT",
-    text: "O Vitor trouxe consistência real para nossos CRUDs. Os componentes que ele padronizou reduziram o tempo de onboarding de novas telas e o time passou a confiar muito mais nos fluxos de teste antes de cada deploy.",
+    text: "O Vitor entregou a Luna com uma maturidade que não esperávamos de um dev júnior. Ele pensou no fluxo do usuário, na segurança das respostas da IA e na integração com o portal — não precisamos revisar o core nem uma vez depois do merge.",
     initials: "AP",
   },
   {
     name: "Lucas Mendes",
     role: "Desenvolvedor Sênior · VTT",
-    text: "Trabalhar com o Vitor foi muito produtivo. Ele foca em soluções reutilizáveis e tem visão clara de qualidade de código. Os helpers de Cypress que ele criou economizaram horas de debugging em várias releases.",
+    text: "A refatoração do analytics foi um trabalho sólido: ele mapeou os pontos críticos, documentou as decisões e entregou algo que o time consegue manter. A cobertura de testes que ele estruturou com Cypress e Jasmine deu uma confiança real nas releases.",
     initials: "LM",
   },
   {
     name: "Prof. Carlos Siqueira",
     role: "Orientador de TCC",
-    text: "O projeto Sara_core demonstra maturidade técnica acima da média para um aluno de graduação. A integração com IA generativa foi bem fundamentada e entregue com clareza técnica impressionante.",
+    text: "O Sara_core é um dos projetos de TCC mais completos que orientei. Pipeline de voz, grounding com segurança no LLM e simulação ecológica em tempo real — tudo integrado e funcionando. Vitor tem clareza técnica e sabe transformar conceito em sistema real.",
     initials: "CS",
   },
 ];
 
-const metrics = [
-  { value: "-42%", label: "tempo p/ nova tela" },
-  { value: "+33%", label: "componentes reutilizáveis" },
-  { value: "+9pp", label: "cobertura E2E" },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -390,36 +385,22 @@ function Hero() {
           <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
             <MotionLink href="https://github.com/Vitorcostalv" label="GitHub" icon="skill-icons:github-dark" />
             <MotionLink href="https://www.linkedin.com/in/vitorcostalv/" label="LinkedIn" icon="skill-icons:linkedin" />
-            <MotionLink href="/assets/Curriculo.pdf" label="Baixar CV" icon="solar:download-bold" download />
+            <MotionLink href="/assets/Curriculo_Vitor__FullStack.pdf" label="Baixar CV" icon="solar:download-bold" download />
           </motion.div>
         </motion.div>
 
         <motion.div
           initial={false}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="glass-card relative rounded-[2rem] p-5"
+          className="relative flex items-center justify-center"
         >
-          <div className="absolute -right-10 -top-10 size-32 rounded-full bg-acid-400/15 blur-2xl" />
-          <div className="rounded-[1.5rem] border border-white/10 bg-ink-900/86 p-5 light:border-slate-200 light:bg-white">
-            <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4 light:border-slate-200">
-              <div>
-                <p className="text-sm font-bold text-steel-100 light:text-ink-900">Impacto recente</p>
-                <p className="text-xs text-steel-500 light:text-slate-500">Métricas de contexto interno</p>
-              </div>
-              <Icon icon="solar:chart-bold" className="text-acid-400" width={28} height={28} />
-            </div>
-            <div className="mt-5 grid gap-3">
-              {metrics.map((metric) => (
-                <div key={metric.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 light:border-slate-200 light:bg-slate-50">
-                  <p className="font-display text-3xl font-extrabold text-acid-400">{metric.value}</p>
-                  <p className="mt-1 text-sm text-steel-300 light:text-slate-600">{metric.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 text-xs leading-5 text-steel-500 light:text-slate-500">
-              Nota: métricas estimadas a partir de tarefas internas similares antes/depois
-              da padronização de grid, modais e testes E2E.
-            </p>
+          <div className="absolute -right-10 -top-10 size-48 rounded-full bg-acid-400/15 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 light:border-slate-200">
+            <img
+              src="/assets/Perfil_foto.png"
+              alt="Vitor Costa"
+              className="h-auto w-full max-w-sm object-cover"
+            />
           </div>
         </motion.div>
       </div>
