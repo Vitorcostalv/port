@@ -730,7 +730,7 @@ function Contact() {
         <SectionHeader
           eyebrow="Contato"
           title="Vamos transformar regra complexa em interface previsível."
-          copy="Use o formulário com EmailJS, email direto ou LinkedIn."
+          copy=""
         />
 
         <div className="grid gap-6 lg:grid-cols-[1fr_.8fr]">
