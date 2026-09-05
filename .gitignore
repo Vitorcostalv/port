@@ -8,3 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.tsbuildinfo
+
+# Captura de telas gerada localmente, nao versionada
+portfolio-telas.pdf

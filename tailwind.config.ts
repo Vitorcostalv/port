@@ -1,50 +1,52 @@
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
 
 const config: Config = {
-  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./content/**/*.{js,ts}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
-        body: ["var(--font-body)", "ui-sans-serif", "system-ui"],
+        display: ["var(--font-display)", "ui-serif", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
-        ink: {
-          950: "#070b12",
-          900: "#0b1019",
-          850: "#101827",
-          800: "#142034",
+        night: "#090b0a",
+        stone: {
+          DEFAULT: "#151812",
+          deep: "#10130f",
         },
-        acid: {
-          400: "#31f58f",
-          500: "#18d879",
+        parchment: {
+          DEFAULT: "#ddd1b7",
+          dim: "#a99e88",
         },
-        steel: {
-          100: "#e8eef8",
-          300: "#aebbd0",
-          500: "#66758d",
+        moss: "#72805d",
+        brass: {
+          DEFAULT: "#b18a48",
+          hi: "#d1ad67",
         },
+        oxblood: "#672f2c",
       },
-      boxShadow: {
-        line: "0 0 0 1px rgba(148, 163, 184, 0.16)",
-        glow: "0 24px 80px rgba(49, 245, 143, 0.12)",
+      borderColor: {
+        DEFAULT: "rgba(221,209,183,.14)",
+        rule: "rgba(221,209,183,.14)",
+        faint: "rgba(221,209,183,.07)",
       },
-      backgroundImage: {
-        grid:
-          "linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px)",
+      maxWidth: {
+        measure: "62ch",
+      },
+      letterSpacing: {
+        seal: "0.34em",
+      },
+      transitionTimingFunction: {
+        instrument: "cubic-bezier(0.22, 0.61, 0.36, 1)",
       },
     },
   },
-  plugins: [
-    plugin(({ addVariant }) => {
-      addVariant("light", ".light &");
-    }),
-  ],
+  plugins: [],
 };
 
 export default config;

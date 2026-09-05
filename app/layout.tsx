@@ -1,24 +1,37 @@
-import type { Metadata } from "next";
-import { Manrope, Sora } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, JetBrains_Mono, Spline_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { MotionProvider } from "@/components/motion-provider";
 
-const sora = Sora({
+const display = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
-const manrope = Manrope({
+const sans = Spline_Sans({
   subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Vitor Costa | Web Developer",
+  title: "Vitor Costa | Fullstack Developer",
   description:
-    "Portfólio de Vitor Costa, front-end developer focado em React, TypeScript, CRUDs previsíveis e testes E2E.",
+    "Portfólio de Vitor Costa, fullstack developer focado em React, TypeScript, CRUDs previsíveis e testes E2E.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#090b0a",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -27,9 +40,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body className={`${sora.variable} ${manrope.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
+    <html lang="pt-BR">
+      <head>
+        {/* Sem JS o reveal nunca dispara: o conteúdo precisa nascer visível. */}
+        <noscript>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
+      <body className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+        <a
+          href="#conteudo"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:border focus:border-brass focus:bg-stone focus:min-h-11 focus:items-center focus:px-4 focus:py-3 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.18em]"
+        >
+          Pular para o conteúdo
+        </a>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
