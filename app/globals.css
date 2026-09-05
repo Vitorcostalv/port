@@ -15,6 +15,11 @@
   --brass: #b18a48;
   --brass-hi: #d1ad67;
   --oxblood: #672f2c;
+  /* Banda de inversão (uma única seção narrativa, não é tema claro). */
+  --parchment-aged: #d8c9aa;
+  --ink: #11110e;
+  --brass-ink: #6b5124;
+
   --rule: rgba(221, 209, 183, 0.14);
   --rule-faint: rgba(221, 209, 183, 0.07);
 
@@ -169,28 +174,29 @@ select {
   /*
    * Cena do hero. Duas camadas de máscara em interseção — uma elipse larga e
    * fora de centro, cruzada com uma atenuação vertical — para que não exista
-   * nenhum círculo ou retângulo identificável. O limite real de onde o vídeo
-   * termina é dado pelo conteúdo escuro, não pela forma.
+   * nenhum círculo ou retângulo identificável. O raio da elipse termina antes
+   * da borda da caixa (45% de centro para 36% de raio), então o recorte do
+   * contêiner nunca aparece como aresta reta — o vídeo já chegou a zero ali.
    */
   .scene-mask {
     -webkit-mask-image:
       radial-gradient(
-        38% 50% at 38% 44%,
-        #000 10%,
-        rgba(0, 0, 0, 0.86) 38%,
-        rgba(0, 0, 0, 0.44) 62%,
-        rgba(0, 0, 0, 0.14) 82%,
-        transparent 100%
+        36% 46% at 45% 42%,
+        #000 8%,
+        rgba(0, 0, 0, 0.84) 34%,
+        rgba(0, 0, 0, 0.4) 58%,
+        rgba(0, 0, 0, 0.1) 78%,
+        transparent 94%
       ),
       linear-gradient(to bottom, transparent 2%, #000 20%, #000 70%, transparent 97%);
     mask-image:
       radial-gradient(
-        38% 50% at 38% 44%,
-        #000 10%,
-        rgba(0, 0, 0, 0.86) 38%,
-        rgba(0, 0, 0, 0.44) 62%,
-        rgba(0, 0, 0, 0.14) 82%,
-        transparent 100%
+        36% 46% at 45% 42%,
+        #000 8%,
+        rgba(0, 0, 0, 0.84) 34%,
+        rgba(0, 0, 0, 0.4) 58%,
+        rgba(0, 0, 0, 0.1) 78%,
+        transparent 94%
       ),
       linear-gradient(to bottom, transparent 2%, #000 20%, #000 70%, transparent 97%);
     -webkit-mask-composite: source-in;
@@ -235,6 +241,124 @@ select {
   animation: instrument-in 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.55s both;
 }
 
+/* ---- Coreografia editorial. Tudo CSS: o JS só marca `data-in`. ---- */
+
+/*
+ * Cascata de linhas: os filhos diretos entram em sequência quando o bloco
+ * cruza a viewport. Só opacity + translate — nada de layout animado.
+ */
+@keyframes seq-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--seq-x, 0), var(--seq-y, 14px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.seq > * {
+  opacity: 0;
+}
+
+/* `:is()` cobre os dois casos: o marcador `data-in` no próprio bloco em
+   cascata ou num ancestral dele. */
+:is([data-in="true"], [data-in="true"] *) .seq > *,
+[data-in="true"].seq > * {
+  animation: seq-in 0.62s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: calc(var(--seq-delay, 0ms) + var(--seq-step, 70ms) * var(--i, 0));
+}
+
+/* Índice de cascata sem style inline: o nth-child já numera os filhos. */
+.seq > *:nth-child(1) { --i: 0; }
+.seq > *:nth-child(2) { --i: 1; }
+.seq > *:nth-child(3) { --i: 2; }
+.seq > *:nth-child(4) { --i: 3; }
+.seq > *:nth-child(5) { --i: 4; }
+.seq > *:nth-child(6) { --i: 5; }
+.seq > *:nth-child(7) { --i: 6; }
+.seq > *:nth-child(8) { --i: 7; }
+.seq > *:nth-child(9) { --i: 8; }
+.seq > *:nth-child(10) { --i: 9; }
+.seq > *:nth-child(n + 11) { --i: 10; }
+
+/* Filete revelado: escala horizontal a partir da esquerda, uma vez. */
+@keyframes rule-sweep {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rule-sweep {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+:is([data-in="true"], [data-in="true"] *) .rule-sweep,
+[data-in="true"].rule-sweep {
+  animation: rule-sweep 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+}
+
+/*
+ * Diagramas: o traço é desenhado na entrada e para. `--len` pode ser maior que
+ * o comprimento real do caminho — o offset final é sempre 0, então o estado
+ * de repouso é o desenho completo, independente da estimativa.
+ */
+@keyframes draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes node-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.draw-path {
+  stroke-dasharray: var(--len, 340);
+  stroke-dashoffset: var(--len, 340);
+}
+
+:is([data-in="true"], [data-in="true"] *) .draw-path,
+[data-in="true"].draw-path {
+  animation: draw-in 1.05s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 85ms);
+}
+
+.draw-node {
+  opacity: 0;
+}
+
+:is([data-in="true"], [data-in="true"] *) .draw-node,
+[data-in="true"].draw-node {
+  animation: node-in 0.45s ease-out both;
+  animation-delay: calc(340ms + var(--i, 0) * 85ms);
+}
+
+/*
+ * Banda de inversão — a única do site. Não é light mode: é uma seção
+ * narrativa que reescreve os tokens de filete localmente para continuar
+ * usando os mesmos utilitários das seções escuras.
+ */
+.band-light {
+  background: var(--parchment-aged);
+  color: var(--ink);
+  --rule: rgba(17, 17, 14, 0.2);
+  --rule-faint: rgba(17, 17, 14, 0.1);
+}
+
+.band-light .eyebrow {
+  color: var(--brass-ink);
+}
+
+.band-light ::selection {
+  background: rgba(17, 17, 14, 0.22);
+  color: var(--ink);
+}
+
 /* ---- Estados do formulário ---- */
 .control:hover:not(:focus) {
   border-color: rgba(221, 209, 183, 0.26);
@@ -253,6 +377,21 @@ select {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* O estado final não pode depender do IntersectionObserver: quem pediu menos
+     movimento vê o conteúdo desenhado de imediato, mesmo antes de rolar. */
+  .seq > *,
+  .draw-node {
+    opacity: 1;
+  }
+
+  .draw-path {
+    stroke-dashoffset: 0;
+  }
+
+  .rule-sweep {
+    transform: none;
   }
 
   *,

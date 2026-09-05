@@ -42,9 +42,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Sem JS o reveal nunca dispara: o conteúdo precisa nascer visível. */}
+        {/* Sem JS nem o reveal do Motion nem o `data-in` do IntersectionObserver
+            disparam: tudo que nasce oculto precisa voltar ao estado final. */}
         <noscript>
-          <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[style*="opacity:0"],[style*="opacity: 0"],.seq>*,.draw-node{opacity:1!important;transform:none!important;animation:none!important}.rule-sweep{transform:none!important}.draw-path{stroke-dashoffset:0!important}`}</style>
         </noscript>
       </head>
       <body className={`${display.variable} ${sans.variable} ${mono.variable}`}>

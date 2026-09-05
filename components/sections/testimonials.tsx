@@ -1,3 +1,4 @@
+import { InView } from "@/components/in-view";
 import { OrnamentRule } from "@/components/ornaments";
 import { Reveal } from "@/components/reveal";
 import { testimonials } from "@/content/portfolio";
@@ -8,9 +9,9 @@ import { testimonials } from "@/content/portfolio";
  * nada de masonry.
  */
 const LAYOUT = [
-  { box: "lg:ml-0 lg:mr-[26%]", quote: "text-[clamp(1.5rem,3.9vw,2.15rem)]", align: "" },
-  { box: "lg:ml-[26%] lg:mr-0", quote: "text-[clamp(1.3rem,3.2vw,1.75rem)]", align: "lg:text-right" },
-  { box: "lg:ml-[10%] lg:mr-[16%]", quote: "text-[clamp(1.4rem,3.5vw,1.95rem)]", align: "" },
+  { box: "lg:ml-0 lg:mr-[26%]", quote: "text-[clamp(1.5rem,3.9vw,2.15rem)]", align: "", x: -22 },
+  { box: "lg:ml-[26%] lg:mr-0", quote: "text-[clamp(1.3rem,3.2vw,1.75rem)]", align: "lg:text-right", x: 26 },
+  { box: "lg:ml-[10%] lg:mr-[16%]", quote: "text-[clamp(1.4rem,3.5vw,1.95rem)]", align: "", x: -14 },
 ];
 
 export function Testimonials() {
@@ -31,13 +32,17 @@ export function Testimonials() {
           </p>
         </Reveal>
 
-        <OrnamentRule className="mt-14" offset={0.24} />
+        <InView className="mt-14">
+          <OrnamentRule className="rule-sweep" offset={0.24} />
+        </InView>
 
         <div className="mt-6">
           {testimonials.map((item, index) => (
             <Reveal
               key={item.name}
               delay={0.04 * index}
+              y={12}
+              x={LAYOUT[index % LAYOUT.length].x}
               className={`border-t border-[var(--rule-faint)] py-12 ${LAYOUT[index % LAYOUT.length].box}`}
             >
               <figure className={`relative ${LAYOUT[index % LAYOUT.length].align}`}>

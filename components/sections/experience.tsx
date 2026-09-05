@@ -1,3 +1,4 @@
+import { InView } from "@/components/in-view";
 import { AstrolabeSeal } from "@/components/ornaments";
 import { Reveal } from "@/components/reveal";
 import { experience } from "@/content/portfolio";
@@ -22,9 +23,10 @@ export function Experience() {
         <ol className="mt-20">
           {experience.map((entry) => (
             <li key={`${entry.company}-${entry.period}`}>
-              <Reveal className="grid gap-6 border-t border-[var(--rule)] pt-8 lg:grid-cols-12 lg:gap-x-10">
-                {/* coluna de data, estreita */}
-                <div className="flex items-start gap-4 lg:col-span-3 lg:flex-col lg:gap-5">
+              <Reveal className="grid items-start gap-6 border-t border-[var(--rule)] pt-8 lg:grid-cols-12 lg:gap-x-10">
+                {/* coluna de data, estreita — fica presa enquanto as atribuições
+                    passam ao lado. É o único sticky desta seção. */}
+                <div className="flex items-start gap-4 lg:col-span-3 lg:flex-col lg:gap-5 lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:self-start">
                   <AstrolabeSeal className="shrink-0" />
                   <p className="font-mono text-[0.6875rem] uppercase tracking-seal text-brass">
                     {entry.period}
@@ -40,7 +42,11 @@ export function Experience() {
                     {entry.stack.join("  ·  ")}
                   </p>
 
-                  <div className="mt-10 grid gap-px bg-[var(--rule-faint)] lg:grid-cols-3">
+                  <InView
+                    as="div"
+                    className="seq mt-10 grid gap-px bg-[var(--rule-faint)] lg:grid-cols-3"
+                    style={{ "--seq-step": "110ms" } as React.CSSProperties}
+                  >
                     {entry.duties.map((duty, index) => (
                       <div key={duty} className="bg-night pt-6 lg:px-6 lg:first:pl-0 lg:last:pr-0">
                         <p className="font-mono text-[0.625rem] tracking-[0.2em] text-brass">
@@ -49,7 +55,7 @@ export function Experience() {
                         <p className="mt-3 text-sm leading-6 text-parchment-dim">{duty}</p>
                       </div>
                     ))}
-                  </div>
+                  </InView>
                 </div>
               </Reveal>
             </li>
