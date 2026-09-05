@@ -13,17 +13,20 @@ export function Reveal({
   className,
   delay = 0,
   y = 18,
+  x = 0,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;
+  /** Deslocamento lateral de entrada — usado para quebrar listas repetitivas. */
+  x?: number;
 }) {
   return (
     <m.div
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y, x }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay, ease: [0.22, 0.61, 0.36, 1] }}
     >

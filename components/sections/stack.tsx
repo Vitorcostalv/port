@@ -1,3 +1,4 @@
+import { InView } from "@/components/in-view";
 import { Reveal } from "@/components/reveal";
 import { OrnamentRule } from "@/components/ornaments";
 import { stackCategories, techStack } from "@/content/portfolio";
@@ -43,7 +44,10 @@ export function Stack() {
           </div>
         </Reveal>
 
-        <OrnamentRule className="mt-12" offset={0.68} />
+        {/* Divisor desenhado: escala horizontal a partir da esquerda, uma vez. */}
+        <InView className="mt-12">
+          <OrnamentRule className="rule-sweep" offset={0.68} />
+        </InView>
 
         <div className="mt-4">
           {stackCategories.map((category, categoryIndex) => {
@@ -51,12 +55,13 @@ export function Stack() {
             if (items.length === 0) return null;
 
             return (
-              <Reveal
+              <InView
                 key={category.value}
-                delay={0.04}
+                amount={0.12}
                 className="grid gap-y-4 border-t border-[var(--rule-faint)] py-8 lg:grid-cols-12 lg:gap-x-10"
               >
-                <div className="lg:col-span-3">
+                {/* A categoria entra primeiro; as linhas seguem em cascata. */}
+                <div className="seq lg:col-span-3">
                   <h3 className="flex items-baseline gap-3 font-mono text-[0.6875rem] uppercase tracking-seal text-brass">
                     <span className="text-parchment-dim/50">
                       {String(categoryIndex + 1).padStart(2, "0")}
@@ -65,7 +70,10 @@ export function Stack() {
                   </h3>
                 </div>
 
-                <ul className="lg:col-span-9">
+                <ul
+                  className="seq lg:col-span-9"
+                  style={{ "--seq-step": "58ms", "--seq-delay": "140ms" } as React.CSSProperties}
+                >
                   {items.map((tech) => (
                     <li
                       key={tech.name}
@@ -92,7 +100,7 @@ export function Stack() {
                     </li>
                   ))}
                 </ul>
-              </Reveal>
+              </InView>
             );
           })}
         </div>

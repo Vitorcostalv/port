@@ -53,7 +53,14 @@ const readCapability = () => {
 };
 const serverCapability = () => false;
 
-export function AstrolabeStage() {
+export function AstrolabeStage({
+  className = "mx-auto max-w-[34rem]",
+  progressRef,
+}: {
+  className?: string;
+  /** Progresso de scroll 0→1 repassado ao rAF do canvas, sem passar por state. */
+  progressRef?: { current: number };
+}) {
   const use3D = useSyncExternalStore(subscribeNever, readCapability, serverCapability);
   const [canvasReady, setCanvasReady] = useState(false);
 
@@ -67,7 +74,7 @@ export function AstrolabeStage() {
       // Com `overflow-hidden`: a gravura de fundo tem 112% e escaparia da caixa,
       // gerando 1px de overflow horizontal em telas estreitas. A máscara já
       // fecha dentro do box, então o clip não reintroduz borda visível.
-      className="relative mx-auto aspect-square w-full max-w-[34rem] overflow-hidden sm:aspect-[4/5] lg:mr-0 lg:aspect-square"
+      className={`relative aspect-square w-full overflow-hidden sm:aspect-[4/5] lg:aspect-square ${className}`}
     >
       {/* 1. cinemagraph medieval, composto em `screen`: o escuro dissolve no
              fundo e só luar, vela e papiro emergem. A máscara elíptica
@@ -103,6 +110,7 @@ export function AstrolabeStage() {
         {use3D ? (
           <AstrolabeCanvas
             onReady={handleReady}
+            progressRef={progressRef}
             className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${
               canvasReady ? "opacity-100" : "opacity-0"
             }`}

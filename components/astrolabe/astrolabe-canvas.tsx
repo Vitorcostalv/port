@@ -30,6 +30,24 @@ const SPEED = {
 const ALIDADE_REST = THREE.MathUtils.degToRad(-24);
 const ALIDADE_AMPLITUDE = THREE.MathUtils.degToRad(2.2);
 
+/**
+ * Deslocamento total (em radianos) que cada andar do mecanismo acumula ao
+ * longo de todo o trilho de scroll do hero. Sentidos e magnitudes diferentes:
+ * é o contraste entre os andares que faz o instrumento parecer articulado, não
+ * uma imagem girando. Somado ao idle — nunca substitui.
+ */
+const SCROLL_SWEEP = {
+  mater: 0.18,
+  reteOuter: 0.52,
+  reteMid: -0.86,
+  reteInner: 1.34,
+  alidade: -0.3,
+};
+
+/** Profundidade: o instrumento recua alguns décimos ao longo do trilho. */
+const SCROLL_DEPTH = -0.85;
+const SCROLL_TILT = THREE.MathUtils.degToRad(4);
+
 /** Ruído de valor determinístico — mesma textura em todo render, inclusive no poster. */
 function makeNoise(seed: number) {
   const hash = (x: number, y: number) => {
@@ -450,9 +468,16 @@ function buildAstrolabe(engraving: THREE.CanvasTexture) {
 export default function AstrolabeCanvas({
   onReady,
   className,
+  progressRef,
 }: {
   onReady?: () => void;
   className?: string;
+  /**
+   * Progresso de scroll 0→1, escrito fora do React (MotionValue) e lido aqui
+   * dentro do rAF. Um ref em vez de uma prop de valor: o Three.js nunca
+   * provoca rerender e o React nunca provoca frame.
+   */
+  progressRef?: { current: number };
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
 
@@ -565,6 +590,12 @@ export default function AstrolabeCanvas({
     let inView = false;
     let ready = false;
 
+    // Rotação de repouso acumulada, separada do offset de scroll: somar os dois
+    // no fim mantém o idle contínuo mesmo enquanto o usuário rola.
+    const idle = { mater: 0, outer: 0, mid: 0, inner: 0 };
+    // Progresso amortecido: scroll rápido não teleporta o mecanismo.
+    let progress = 0;
+
     function frame(now: number) {
       const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
       last = now;
@@ -573,22 +604,33 @@ export default function AstrolabeCanvas({
         clock += dt;
 
         // Mecanismos independentes: cada andar no seu próprio ritmo e sentido.
-        mater.rotation.z += SPEED.mater * dt;
-        reteOuter.rotation.z += SPEED.reteOuter * dt;
-        reteMid.rotation.z += SPEED.reteMid * dt;
-        reteInner.rotation.z += SPEED.reteInner * dt;
-        alidade.rotation.z =
-          ALIDADE_REST + Math.sin(clock * SPEED.alidadeSweep) * ALIDADE_AMPLITUDE;
+        idle.mater += SPEED.mater * dt;
+        idle.outer += SPEED.reteOuter * dt;
+        idle.mid += SPEED.reteMid * dt;
+        idle.inner += SPEED.reteInner * dt;
 
         // O conjunto inteiro é que responde ao ponteiro, com amortecimento.
         const damp = Math.min(dt * 2.4, 1);
         current.x += (pointer.y * MAX_TILT_X - current.x) * damp;
         current.y += (pointer.x * MAX_TILT_Y - current.y) * damp;
+
+        const target = progressRef ? progressRef.current : 0;
+        progress += (target - progress) * Math.min(dt * 3.4, 1);
       }
 
-      group.rotation.x = REST_X + current.x;
+      mater.rotation.z = idle.mater + progress * SCROLL_SWEEP.mater;
+      reteOuter.rotation.z = idle.outer + progress * SCROLL_SWEEP.reteOuter;
+      reteMid.rotation.z = idle.mid + progress * SCROLL_SWEEP.reteMid;
+      reteInner.rotation.z = idle.inner + progress * SCROLL_SWEEP.reteInner;
+      alidade.rotation.z =
+        ALIDADE_REST +
+        (reduced ? 0 : Math.sin(clock * SPEED.alidadeSweep) * ALIDADE_AMPLITUDE) +
+        progress * SCROLL_SWEEP.alidade;
+
+      group.rotation.x = REST_X + current.x + progress * SCROLL_TILT;
       group.rotation.y = REST_Y + current.y;
       group.rotation.z = REST_Z;
+      group.position.z = progress * SCROLL_DEPTH;
 
       renderer.render(scene, camera);
 
@@ -652,7 +694,7 @@ export default function AstrolabeCanvas({
       renderer.dispose();
       canvas.remove();
     };
-  }, [onReady]);
+  }, [onReady, progressRef]);
 
   return <div ref={hostRef} className={className} aria-hidden />;
 }
