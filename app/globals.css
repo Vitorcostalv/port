@@ -2,8 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ARCANE ENGINEERING — techno-medieval editorial
+   Paleta única, escura. Sem tema claro. */
 :root {
   color-scheme: dark;
+
+  --night: #090b0a;
+  --stone: #151812;
+  --parchment: #ddd1b7;
+  --parchment-dim: #a99e88;
+  --moss: #72805d;
+  --brass: #b18a48;
+  --brass-hi: #d1ad67;
+  --oxblood: #672f2c;
+  --rule: rgba(221, 209, 183, 0.14);
+  --rule-faint: rgba(221, 209, 183, 0.07);
+
+  /* Altura do cabeçalho — usada por scroll-margin e pelo hero. */
+  --header-h: 4.5rem;
 }
 
 * {
@@ -12,48 +28,238 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100svh;
   overflow-x: hidden;
-  background: #070b12;
-  color: #e8eef8;
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  background: var(--night);
+  color: var(--parchment);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.light body {
-  background: #f6f8fb;
-  color: #101827;
+/* Iluminação quente muito discreta, vinda do alto — não é blob de gradiente:
+   é uma única lavagem radial de baixíssima opacidade presa ao topo do documento. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    120% 62% at 68% -14%,
+    rgba(177, 138, 72, 0.09),
+    rgba(177, 138, 72, 0.02) 42%,
+    transparent 70%
+  );
+}
+
+/* Textura global única: grain SVG de ~200 bytes, opacidade muito baixa. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: rgba(49, 245, 143, 0.28);
+  background: rgba(177, 138, 72, 0.3);
+  color: var(--parchment);
+}
+
+:where(section, main, header, footer) {
+  position: relative;
+  z-index: 2;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass-hi);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+  color: inherit;
 }
 
 @layer components {
-  .section-shell {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  .shell {
+    @apply mx-auto w-full max-w-[78rem] px-5 sm:px-8 lg:px-12;
   }
 
-  .section-label {
-    @apply text-xs font-bold uppercase tracking-[0.28em] text-acid-400;
+  /* Marcação editorial: número/rótulo de seção em mono, com filete. */
+  .eyebrow {
+    @apply font-mono text-[0.6875rem] uppercase tracking-seal text-brass;
   }
 
-  .section-title {
-    @apply mt-3 font-display text-3xl font-extrabold tracking-normal text-steel-100 sm:text-4xl;
+  .display {
+    @apply font-display font-medium leading-[0.95] tracking-[-0.015em] text-parchment;
   }
 
-  .light .section-title {
-    @apply text-ink-900;
+  .prose-measure {
+    @apply max-w-measure text-[1.0625rem] leading-[1.7] text-parchment-dim;
   }
 
-  .glass-card {
-    @apply border border-white/10 bg-white/[0.055] shadow-line backdrop-blur-2xl;
+  /* Filete horizontal fino — o separador base do design system. */
+  .rule-h {
+    @apply h-px w-full bg-[var(--rule)];
   }
 
-  .light .glass-card {
-    @apply border-slate-200 bg-white shadow-sm;
+  /* Underline que cresce como linha desenhada (sem deslocar layout). */
+  .link-draw {
+    background-image: linear-gradient(var(--brass-hi), var(--brass-hi));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Botão/campo: sem raio grande, sem glass. Bronze só na borda. */
+  .control {
+    @apply border border-[var(--rule)] bg-[rgba(221,209,183,0.02)] px-4 py-3
+           text-parchment outline-none transition-colors duration-300;
+  }
+
+  .control:focus {
+    border-color: var(--brass);
+  }
+
+  .btn-brass {
+    @apply inline-flex min-h-11 items-center justify-center gap-2.5 border border-[var(--rule)]
+           bg-[rgba(221,209,183,0.03)] px-5 py-3 font-mono text-xs uppercase tracking-[0.18em]
+           text-parchment transition-[border-color,color,background-color,transform] duration-300;
+  }
+
+  .btn-brass:hover,
+  .btn-brass:focus-visible {
+    border-color: rgba(209, 173, 103, 0.55);
+    color: var(--brass-hi);
+    background-color: rgba(177, 138, 72, 0.06);
+    transform: translateY(-1px);
+  }
+
+  /* Seções longas: pula pintura fora da viewport sem causar CLS. */
+  .defer-paint {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
+  /*
+   * Cena do hero. Duas camadas de máscara em interseção — uma elipse larga e
+   * fora de centro, cruzada com uma atenuação vertical — para que não exista
+   * nenhum círculo ou retângulo identificável. O limite real de onde o vídeo
+   * termina é dado pelo conteúdo escuro, não pela forma.
+   */
+  .scene-mask {
+    -webkit-mask-image:
+      radial-gradient(
+        38% 50% at 38% 44%,
+        #000 10%,
+        rgba(0, 0, 0, 0.86) 38%,
+        rgba(0, 0, 0, 0.44) 62%,
+        rgba(0, 0, 0, 0.14) 82%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 2%, #000 20%, #000 70%, transparent 97%);
+    mask-image:
+      radial-gradient(
+        38% 50% at 38% 44%,
+        #000 10%,
+        rgba(0, 0, 0, 0.86) 38%,
+        rgba(0, 0, 0, 0.44) 62%,
+        rgba(0, 0, 0, 0.14) 82%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 2%, #000 20%, #000 70%, transparent 97%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  /*
+   * Composição da cena: em `screen` sobre um fundo quase preto, a pedra escura
+   * simplesmente some e só o que é luz emerge — luar, vela, papiro.
+   */
+  .scene-blend {
+    mix-blend-mode: screen;
+  }
+}
+
+/* ---- Entrada do hero. CSS puro: nenhum JS extra para a coreografia. ---- */
+@keyframes scene-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes instrument-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.984);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.anim-scene {
+  animation: scene-in 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s both;
+}
+
+.anim-instrument {
+  animation: instrument-in 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.55s both;
+}
+
+/* ---- Estados do formulário ---- */
+.control:hover:not(:focus) {
+  border-color: rgba(221, 209, 183, 0.26);
+}
+
+.control:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Só marca erro depois que o campo foi tocado — nunca em campo vazio intocado. */
+.control[data-touched="true"]:invalid {
+  border-color: rgba(103, 47, 44, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
