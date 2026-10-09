@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.neural-network[data-ready="true"] .neural-fallback {
+  visibility: hidden;
+}
+
+.neural-network:not([data-ready="true"]) canvas {
+  visibility: hidden;
+}
+
 /* ARCANE ENGINEERING — techno-medieval editorial
    Paleta única, escura. Sem tema claro. */
 :root {

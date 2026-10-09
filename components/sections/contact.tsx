@@ -68,7 +68,7 @@ export function Contact() {
   ] as const;
 
   return (
-    <section id="contato" className="defer-paint border-t border-[var(--rule)] py-28 sm:py-36">
+    <section id="contato" className="defer-paint border-t border-[var(--rule)] py-16 sm:py-36">
       <div className="shell">
         <Reveal className="lg:max-w-[62%]">
           <p className="eyebrow">

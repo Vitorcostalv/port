@@ -3,7 +3,7 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { ArrowUpRightIcon, CloseIcon, GithubIcon } from "@/components/icons";
 import { AstrolabeSeal } from "@/components/ornaments";
-import { ProjectArtifact } from "@/components/project-artifacts";
+import { ProjectPreview } from "@/components/project-preview";
 import type { Project } from "@/content/portfolio";
 
 export function ProjectDialog({
@@ -24,10 +24,10 @@ export function ProjectDialog({
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-[60] bg-[rgba(9,11,10,0.86)] backdrop-blur-sm" />
         <Dialog.Popup className="fixed left-1/2 top-1/2 z-[70] max-h-[85svh] w-[min(46rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto border border-[var(--rule)] bg-stone p-6 outline-none sm:p-10">
-          <div className="flex items-start justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <AstrolabeSeal className="mt-1 shrink-0" size={28} />
-              <div>
+          <div className="flex items-start justify-between gap-3 sm:gap-6">
+            <div className="flex min-w-0 items-start gap-4">
+              <AstrolabeSeal className="mt-1 hidden shrink-0 sm:block" size={28} />
+              <div className="min-w-0">
                 <Dialog.Title className="display text-3xl sm:text-4xl">
                   {project.title}
                 </Dialog.Title>
@@ -47,22 +47,25 @@ export function ProjectDialog({
 
           <div className="mt-8 h-px w-full bg-[var(--rule)]" />
 
-          <ProjectArtifact title={project.title} className="mx-auto mt-8 max-w-[26rem]" />
+          <div className="mt-8"><ProjectPreview project={project} /></div>
 
           <Dialog.Description className="mt-8 text-[1.0625rem] leading-[1.75] text-parchment-dim">
             {project.description}
           </Dialog.Description>
 
+          <div className="mt-10 flex flex-wrap gap-4">
+          <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-brass">Abrir demo <ArrowUpRightIcon /></a>
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-brass mt-10"
+            className="btn-brass"
           >
             <GithubIcon />
             Ver no GitHub
             <ArrowUpRightIcon />
           </a>
+          </div>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

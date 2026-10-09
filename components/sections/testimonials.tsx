@@ -16,7 +16,7 @@ const LAYOUT = [
 
 export function Testimonials() {
   return (
-    <section id="depoimentos" className="defer-paint py-28 sm:py-36">
+    <section id="depoimentos" className="defer-paint py-16 sm:py-36">
       <div className="shell">
         <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
