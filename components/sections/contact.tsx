@@ -71,12 +71,7 @@ export function Contact() {
     <section id="contato" className="defer-paint border-t border-[var(--rule)] py-16 sm:py-36">
       <div className="shell">
         <Reveal className="lg:max-w-[62%]">
-          <p className="eyebrow">
-            <span className="text-parchment-dim/60">05 </span>Correspondência
-          </p>
-          <h2 className="display mt-6 text-[clamp(2rem,7vw,3rem)]">
-            Vamos transformar regra complexa em interface previsível.
-          </h2>
+          <h2 className="display text-[clamp(2rem,7vw,3rem)]">Entre em contato.</h2>
         </Reveal>
 
         <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-x-10">
@@ -158,7 +153,7 @@ export function Contact() {
 
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.08}>
             <p className="font-mono text-[0.625rem] uppercase tracking-seal text-brass">
-              Canais diretos
+              Email e redes
             </p>
             <ul className="mt-6">
               {contactChannels.map((channel) => (

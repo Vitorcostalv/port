@@ -53,7 +53,7 @@ export function ProjectsOverture() {
               Projetos pessoais e estudos.
             </h2>
             <p className="max-w-[34ch] font-mono text-[0.6875rem] uppercase leading-6 tracking-[0.16em] opacity-70">
-              Três projetos no ar. Explore as demos e o código por trás de cada experiência.
+              Demos e código no GitHub.
             </p>
           </div>
         </div>

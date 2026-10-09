@@ -7,9 +7,9 @@ export const person = {
   name: "Vitor Costa",
   roles: ["Fullstack Developer", "Software Engineer", "Programming Enthusiast"],
   availability: "Aberto a novas vagas",
-  headline: "Desenvolvo sistemas completos, do banco de dados à interface.",
+  headline: "Desenvolvo aplicações web.",
   standfirst:
-    "Foco em componentes reutilizáveis, APIs bem estruturadas e qualidade testável.",
+    "React, TypeScript, APIs e IA.",
   email: "VitorCostalv@proton.me",
   github: "https://github.com/Vitorcostalv",
   linkedin: "https://www.linkedin.com/in/vitorcostalv/",
@@ -25,22 +25,8 @@ export const navItems = [
 ] as const;
 
 export const about = {
-  title: "Interface boa é aquela que continua clara depois do deploy.",
-  body: "Comecei a programar por curiosidade — queria entender como as coisas funcionam por baixo. Hoje o que me motiva é construir sistemas que o time consegue evoluir sem medo: do banco de dados à tela, com componentes previsíveis, estados legíveis e testes que protegem os fluxos críticos.",
-  notes: [
-    {
-      term: "Produto",
-      note: "Traduzo regra de negócio em fluxos de tela simples de operar.",
-    },
-    {
-      term: "DX",
-      note: "Padronizo componentes para reduzir decisões repetidas em CRUDs.",
-    },
-    {
-      term: "Qualidade",
-      note: "Uso testes E2E para proteger caminhos críticos antes do deploy.",
-    },
-  ],
+  title: "Web e integrações com IA.",
+  body: "Trabalho com React, TypeScript e APIs. Também desenvolvo integrações com IA usando RAG e MCP.",
 } as const;
 
 export type StackCategory =
@@ -49,36 +35,38 @@ export type StackCategory =
   | "database"
   | "devops"
   | "linux"
-  | "quality";
+  | "quality"
+  | "ai";
 
 export type Tech = {
   name: string;
   category: StackCategory;
-  level: "Iniciante" | "Intermediário" | "Avançado";
-  since: string;
+  icon: string;
 };
 
 export const techStack: Tech[] = [
-  { name: "React", category: "frontend", level: "Avançado", since: "3 anos" },
-  { name: "Next.js", category: "frontend", level: "Intermediário", since: "1 ano" },
-  { name: "Tailwind CSS", category: "frontend", level: "Avançado", since: "1 ano" },
-  { name: "TypeScript", category: "frontend", level: "Avançado", since: "3 anos" },
-  { name: "Vue.js", category: "frontend", level: "Iniciante", since: "1 ano" },
-  { name: "Laravel", category: "backend", level: "Iniciante", since: "2 anos" },
-  { name: "Django", category: "backend", level: "Iniciante", since: "1 ano" },
-  { name: "Java", category: "backend", level: "Intermediário", since: "2 anos" },
-  { name: "Go", category: "backend", level: "Iniciante", since: "estudo" },
-  { name: "Node.js", category: "backend", level: "Avançado", since: "3 anos" },
-  { name: "NestJS", category: "backend", level: "Iniciante", since: "2 anos" },
-  { name: "PostgreSQL", category: "database", level: "Intermediário", since: "2 anos" },
-  { name: "MySQL", category: "database", level: "Intermediário", since: "2 anos" },
-  { name: "Firebase", category: "database", level: "Iniciante", since: "estudo" },
-  { name: "Supabase", category: "database", level: "Intermediário", since: "1 ano" },
-  { name: "Docker", category: "devops", level: "Iniciante", since: "1 ano" },
-  { name: "Ubuntu", category: "linux", level: "Intermediário", since: "1 ano" },
-  { name: "Debian", category: "linux", level: "Intermediário", since: "uso diário" },
-  { name: "Cypress", category: "quality", level: "Avançado", since: "2 anos" },
-  { name: "Jasmine", category: "quality", level: "Intermediário", since: "1 ano" },
+  { name: "React", category: "frontend", icon: "/icons/react.svg" },
+  { name: "Next.js", category: "frontend", icon: "/icons/nextdotjs.svg" },
+  { name: "Tailwind CSS", category: "frontend", icon: "/icons/tailwindcss.svg" },
+  { name: "TypeScript", category: "frontend", icon: "/icons/typescript.svg" },
+  { name: "Vue.js", category: "frontend", icon: "/icons/vuedotjs.svg" },
+  { name: "Laravel", category: "backend", icon: "/icons/laravel.svg" },
+  { name: "Django", category: "backend", icon: "/icons/django.svg" },
+  { name: "Java", category: "backend", icon: "/icons/openjdk.svg" },
+  { name: "Go", category: "backend", icon: "/icons/go.svg" },
+  { name: "Node.js", category: "backend", icon: "/icons/nodedotjs.svg" },
+  { name: "NestJS", category: "backend", icon: "/icons/nestjs.svg" },
+  { name: "PostgreSQL", category: "database", icon: "/icons/postgresql.svg" },
+  { name: "MySQL", category: "database", icon: "/icons/mysql.svg" },
+  { name: "Firebase", category: "database", icon: "/icons/firebase.svg" },
+  { name: "Supabase", category: "database", icon: "/icons/supabase.svg" },
+  { name: "Docker", category: "devops", icon: "/icons/docker.svg" },
+  { name: "Ubuntu", category: "linux", icon: "/icons/ubuntu.svg" },
+  { name: "Debian", category: "linux", icon: "/icons/debian.svg" },
+  { name: "Cypress", category: "quality", icon: "/icons/cypress.svg" },
+  { name: "Jasmine", category: "quality", icon: "/icons/jasmine.svg" },
+  { name: "MCP", category: "ai", icon: "/icons/modelcontextprotocol.svg" },
+  { name: "RAG", category: "ai", icon: "/icons/rag.svg" },
 ];
 
 export const stackCategories: { value: StackCategory; label: string }[] = [
@@ -87,7 +75,8 @@ export const stackCategories: { value: StackCategory; label: string }[] = [
   { value: "database", label: "Banco" },
   { value: "devops", label: "DevOps" },
   { value: "linux", label: "Linux" },
-  { value: "quality", label: "Qualidade" },
+  { value: "quality", label: "Testes" },
+  { value: "ai", label: "IA e integrações" },
 ];
 
 export const experience = [
@@ -97,9 +86,9 @@ export const experience = [
     role: "Desenvolvedor Junior de Software",
     stack: ["React", "TypeScript", "Cypress"],
     duties: [
-      "Desenvolvi a Luna — IA integrada ao novo portal VTT responsável por auxiliar cadastros, responder dúvidas operacionais e atuar como assistente principal dos usuários dentro da plataforma.",
-      "Condução da manutenção e refatoração do sistema de analytics da empresa, modernizando a base de código, eliminando dívidas técnicas e garantindo maior confiabilidade dos dados reportados.",
-      "Desenvolvimento de suítes de testes automatizados com Cypress e Jasmine, cobrindo fluxos críticos da aplicação e estabelecendo uma base sólida de qualidade contínua para o time.",
+      "Desenvolvi a Luna, assistente de IA do portal VTT para cadastros e dúvidas dos usuários.",
+      "Fiz a manutenção e a refatoração do sistema de analytics da empresa.",
+      "Criei testes automatizados com Cypress e Jasmine para os principais fluxos do portal.",
     ],
   },
 ] as const;
@@ -118,8 +107,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "CLT vs PJ",
-    summary: "Duas propostas, uma comparação clara: descubra o que sobra no bolso em cada regime.",
-    description: "Calculadora que compara propostas CLT e PJ no Simples Nacional, com descontos detalhados, fontes para as regras e ponto de equilíbrio. O motor de cálculo é independente da interface e o cenário pode ser compartilhado pela URL.",
+    summary: "Compare o valor líquido de propostas CLT e PJ.",
+    description: "Calcula descontos, impostos e o ponto de equilíbrio entre CLT e PJ. Permite compartilhar a comparação pela URL.",
     stack: ["Next.js", "TypeScript", "React", "Vitest"],
     github: "https://github.com/Vitorcostalv/clt-vs-pj",
     demo: "https://clt-vs-pj-alpha.vercel.app/",
@@ -128,8 +117,8 @@ export const projects: Project[] = [
   },
   {
     title: "Fósforo",
-    summary: "Um laboratório no navegador para assistir redes neurais aprenderem a jogar Flappy Bird.",
-    description: "Laboratório de neuroevolução com NEAT: uma população de pássaros aprende a jogar enquanto a interface mostra a rede neural, o fitness e as espécies por geração. Permite ajustar parâmetros, editar fases e jogar contra a IA com a mesma física. A simulação roda em Web Worker, separada da interface.",
+    summary: "Redes neurais aprendendo a jogar Flappy Bird.",
+    description: "Simulação com NEAT, visualização das redes e gráficos de evolução. Permite ajustar o treino, editar fases e jogar contra a IA.",
     stack: ["Next.js", "TypeScript", "Canvas", "Web Workers", "NEAT"],
     github: "https://github.com/Vitorcostalv/fosforo",
     demo: "https://fosforo-lab.vercel.app/",
@@ -138,8 +127,8 @@ export const projects: Project[] = [
   },
   {
     title: "Tarja",
-    summary: "Do schema SQL ao inventário de dados: uma primeira leitura dos dados pessoais e sensíveis.",
-    description: "Ferramenta que analisa schemas MySQL no navegador, classifica possíveis dados pessoais e sensíveis e apresenta motivo, confiança, fontes e sugestões de proteção. Gera um rascunho de inventário e também verifica convenções de DDL. Usa regras determinísticas e testáveis para apoiar a revisão humana.",
+    summary: "Identifique dados pessoais e sensíveis em schemas SQL.",
+    description: "Analisa schemas MySQL, sinaliza possíveis dados pessoais e sensíveis e gera um rascunho de inventário. Mostra o motivo de cada classificação para revisão.",
     stack: ["Next.js", "TypeScript", "MySQL / DDL", "Vitest"],
     github: "https://github.com/Vitorcostalv/tarja",
     demo: "https://tarja-lgpd.vercel.app/",

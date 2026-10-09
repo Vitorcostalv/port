@@ -11,9 +11,9 @@ export function Projects() {
       <div className="shell relative">
         <div className="mb-8 grid items-center gap-6 border-b border-[var(--rule)] pb-8 sm:mb-12 lg:grid-cols-2">
           <div>
-            <p className="eyebrow text-brass">Da ideia à aplicação</p>
-            <h2 id="projetos-titulo" className="display mt-5 text-[clamp(2rem,6vw,3.5rem)]">Experimente o que construí.</h2>
-            <p className="mt-5 max-w-[44ch] leading-7 text-parchment-dim">Calculadoras, redes neurais e dados. Três experiências para explorar direto no navegador.</p>
+            <p className="eyebrow text-brass">Projetos</p>
+            <h2 id="projetos-titulo" className="display mt-5 text-[clamp(2rem,6vw,3.5rem)]">Meus projetos.</h2>
+            <p className="mt-5 max-w-[44ch] leading-7 text-parchment-dim">Veja as demos ou acesse o código no GitHub.</p>
           </div>
           <NeuralNetwork />
         </div>

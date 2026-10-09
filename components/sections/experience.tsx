@@ -8,19 +8,10 @@ export function Experience() {
     <section id="experiencia" className="defer-paint py-16 sm:py-36">
       <div className="shell">
         <Reveal className="lg:pl-[25%]">
-          <p className="eyebrow">
-            <span className="text-parchment-dim/60">03 </span>Experiência
-          </p>
-          <h2 className="display mt-6 max-w-[16ch] text-[clamp(2rem,7vw,3rem)]">
-            Entrega com foco em manutenção.
-          </h2>
-          <p className="prose-measure mt-6 text-base">
-            A narrativa aqui é simples: menos tela reescrita, mais padrão reutilizável e mais
-            confiança nos fluxos críticos.
-          </p>
+          <h2 className="display text-[clamp(2rem,7vw,3rem)]">Experiência profissional</h2>
         </Reveal>
 
-        <ol className="mt-20">
+        <ol className="mt-10 sm:mt-14">
           {experience.map((entry) => (
             <li key={`${entry.company}-${entry.period}`}>
               <Reveal className="grid items-start gap-6 border-t border-[var(--rule)] pt-8 lg:grid-cols-12 lg:gap-x-10">
