@@ -106,6 +106,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "SONDA",
+    summary: "Investigue a segurança e a qualidade de websites com evidências reais.",
+    description: "Observatório digital que analisa HTTPS, headers, cookies e HTML de páginas públicas. A versão online funciona sem Docker, com relatórios privados, histórico, projetos, comparação e exportação JSON/PDF. Mostra a cobertura da análise e as verificações inconclusivas. O modo completo opcional usa um navegador isolado para screenshots e acessibilidade automatizada.",
+    stack: ["Next.js", "TypeScript", "React", "Vercel Blob", "Playwright", "Vitest"],
+    github: "https://github.com/Vitorcostalv/sonda",
+    demo: "https://sonda-snowy.vercel.app/",
+    preview: "/projects/sonda.png",
+    previewAlt: "SONDA com radar orbital, formulário de diagnóstico de websites e módulos de segurança, privacidade, acessibilidade, performance e SEO.",
+  },
+  {
     title: "CLT vs PJ",
     summary: "Compare o valor líquido de propostas CLT e PJ.",
     description: "Calcula descontos, impostos e o ponto de equilíbrio entre CLT e PJ. Permite compartilhar a comparação pela URL.",
