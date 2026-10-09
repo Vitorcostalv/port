@@ -5,7 +5,7 @@ import { experience } from "@/content/portfolio";
 
 export function Experience() {
   return (
-    <section id="experiencia" className="defer-paint py-28 sm:py-36">
+    <section id="experiencia" className="defer-paint py-16 sm:py-36">
       <div className="shell">
         <Reveal className="lg:pl-[25%]">
           <p className="eyebrow">

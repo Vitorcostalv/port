@@ -107,51 +107,45 @@ export const experience = [
 
 export type Project = {
   title: string;
-  /** Resumo curto derivado da primeira oração da descrição real — sem informação nova. */
   summary: string;
   description: string;
   stack: string[];
   github: string;
-  featured?: boolean;
+  demo: string;
+  preview: string;
+  previewAlt: string;
 };
 
 export const projects: Project[] = [
   {
-    title: "Sara_core",
-    summary:
-      "TCC fullstack solo: pipeline de voz com grounding em PostgreSQL e simulação ecológica em tempo real.",
-    description:
-      "TCC fullstack solo: pipeline de voz (Vosk PT-BR → Gemini/Grok → síntese) com grounding em PostgreSQL e política anti-injeção no system prompt. Motor de ecossistema procedural com classificação climática (Köppen), árvores de comportamento para fauna e visualização 3D em tempo real via Three.js — ciclo dia/noite, chuva, milhares de agentes instanciados. TypeScript monorepo (Node/Express + React 18), observabilidade com Pino.",
-    stack: ["TypeScript", "Node/Express", "React 18", "PostgreSQL", "Three.js", "Pino"],
-    github: "https://github.com/Vitorcostalv/Sara_core",
-    featured: true,
+    title: "CLT vs PJ",
+    summary: "Duas propostas, uma comparação clara: descubra o que sobra no bolso em cada regime.",
+    description: "Calculadora que compara propostas CLT e PJ no Simples Nacional, com descontos detalhados, fontes para as regras e ponto de equilíbrio. O motor de cálculo é independente da interface e o cenário pode ser compartilhado pela URL.",
+    stack: ["Next.js", "TypeScript", "React", "Vitest"],
+    github: "https://github.com/Vitorcostalv/clt-vs-pj",
+    demo: "https://clt-vs-pj-alpha.vercel.app/",
+    preview: "/projects/clt-vs-pj.png",
+    previewAlt: "Calculadora CLT vs PJ com comparação de propostas, holerite e guia do Simples Nacional.",
   },
   {
-    title: "Arvore-binaria-java",
-    summary:
-      "Sistema bancário em Java com Árvore Binária de Busca como estrutura central.",
-    description:
-      "Sistema bancário em Java com Árvore Binária de Busca (BST) como estrutura central — contas armazenadas e recuperadas em O(log n), com inserção, remoção e travessias in/pre/post-order. Projeto funcional com menu interativo via terminal.",
-    stack: ["Java", "BST"],
-    github: "https://github.com/Vitorcostalv/Arvore-binaria-java",
+    title: "Fósforo",
+    summary: "Um laboratório no navegador para assistir redes neurais aprenderem a jogar Flappy Bird.",
+    description: "Laboratório de neuroevolução com NEAT: uma população de pássaros aprende a jogar enquanto a interface mostra a rede neural, o fitness e as espécies por geração. Permite ajustar parâmetros, editar fases e jogar contra a IA com a mesma física. A simulação roda em Web Worker, separada da interface.",
+    stack: ["Next.js", "TypeScript", "Canvas", "Web Workers", "NEAT"],
+    github: "https://github.com/Vitorcostalv/fosforo",
+    demo: "https://fosforo-lab.vercel.app/",
+    preview: "/projects/fosforo.png",
+    previewAlt: "Laboratório Fósforo com simulação de pássaros, rede neural, gráficos e parâmetros de evolução.",
   },
   {
-    title: "BotDiscord",
-    summary:
-      "Bot de Discord com roteamento entre 3 provedores de LLM, fallback automático e cache por hash.",
-    description:
-      "Bot de Discord em TypeScript com roteamento inteligente entre 3 provedores de LLM (Gemini, Groq, Poe) — fallback automático em rate limit e cache por hash SHA-256. Recomendações de jogos e filmes com PRNG determinístico que nunca repete sugestões já avaliadas. Inclui perfis com XP, conquistas, cards de perfil gerados em PNG via canvas e ranking de reviews por servidor. Persistência em SQLite com migrations, deploy no Railway.",
-    stack: ["TypeScript", "SQLite", "Railway"],
-    github: "https://github.com/Vitorcostalv/BotDiscord",
-  },
-  {
-    title: "FlappyBird",
-    summary:
-      "Flappy Bird com IA que aprende a jogar via NEAT, evoluindo pesos e topologia da rede.",
-    description:
-      "Flappy Bird com IA que aprende a jogar via NEAT — algoritmo que evolui pesos e topologia da rede neural sem arquitetura pré-definida. 100 agentes treinam em paralelo por geração com função de fitness de três sinais: +0.1 por frame sobrevivido, +5 por cano ultrapassado, −1 por colisão. Entradas da rede: posição Y do pássaro e distâncias até a abertura do próximo obstáculo. Colisão por pixel-perfect masking. Suporta modo humano e modo IA com indicador de geração em tela. Python · Pygame · NEAT-Python.",
-    stack: ["Python", "Pygame", "NEAT-Python"],
-    github: "https://github.com/Vitorcostalv/FlappyBird",
+    title: "Tarja",
+    summary: "Do schema SQL ao inventário de dados: uma primeira leitura dos dados pessoais e sensíveis.",
+    description: "Ferramenta que analisa schemas MySQL no navegador, classifica possíveis dados pessoais e sensíveis e apresenta motivo, confiança, fontes e sugestões de proteção. Gera um rascunho de inventário e também verifica convenções de DDL. Usa regras determinísticas e testáveis para apoiar a revisão humana.",
+    stack: ["Next.js", "TypeScript", "MySQL / DDL", "Vitest"],
+    github: "https://github.com/Vitorcostalv/tarja",
+    demo: "https://tarja-lgpd.vercel.app/",
+    preview: "/projects/tarja.png",
+    previewAlt: "Tarja analisando colunas de um schema SQL com categorias, confiança e explicação de um dado sensível.",
   },
 ];
 

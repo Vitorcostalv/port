@@ -29,7 +29,7 @@ export function ProjectsOverture() {
     <section
       ref={ref}
       aria-labelledby="projetos-abertura"
-      className="band-light relative overflow-x-clip py-24 sm:py-28 lg:h-[142vh] lg:py-0"
+      className="band-light relative overflow-x-clip py-16 sm:py-28 lg:h-[142vh] lg:py-0"
     >
       <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-center lg:py-[12vh]">
         <div className="shell">
@@ -42,7 +42,7 @@ export function ProjectsOverture() {
         <m.p
           aria-hidden
           style={scene ? { x, scale } : undefined}
-          className="mt-8 whitespace-nowrap font-display text-[clamp(4.6rem,29vw,24rem)] font-medium leading-[0.8] tracking-[-0.04em] lg:mt-10"
+          className="mt-8 whitespace-nowrap font-display text-[clamp(3.5rem,24vw,24rem)] lg:text-[clamp(4.6rem,29vw,24rem)] font-medium leading-[0.8] tracking-[-0.04em] lg:mt-10"
         >
           Projetos
         </m.p>
@@ -53,7 +53,7 @@ export function ProjectsOverture() {
               Projetos pessoais e estudos.
             </h2>
             <p className="max-w-[34ch] font-mono text-[0.6875rem] uppercase leading-6 tracking-[0.16em] opacity-70">
-              Quatro repositórios, cada um com o diagrama do que realmente roda por dentro.
+              Três projetos no ar. Explore as demos e o código por trás de cada experiência.
             </p>
           </div>
         </div>

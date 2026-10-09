@@ -27,7 +27,7 @@ function LevelMark({ level }: { level: string }) {
 
 export function Stack() {
   return (
-    <section id="stack" className="defer-paint border-y border-[var(--rule-faint)] bg-stone-deep py-28 sm:py-36">
+    <section id="stack" className="defer-paint border-y border-[var(--rule-faint)] bg-stone-deep py-16 sm:py-36">
       <div className="shell">
         <Reveal>
           <p className="eyebrow">
