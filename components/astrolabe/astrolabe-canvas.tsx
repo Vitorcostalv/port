@@ -351,13 +351,13 @@ function buildAstrolabe(engraving: THREE.CanvasTexture) {
   const mater = new THREE.Group();
   group.add(mater);
 
-  const plateGeo = new THREE.CircleGeometry(1.5, 72);
+  const plateGeo = new THREE.CircleGeometry(1.5, 48);
   const plateMesh = new THREE.Mesh(plateGeo, plate);
   plateMesh.position.z = -0.06;
   mater.add(plateMesh);
   disposables.push(plateGeo);
 
-  const limbGeo = new THREE.TorusGeometry(1.55, 0.075, 8, 96);
+  const limbGeo = new THREE.TorusGeometry(1.55, 0.075, 6, 64);
   mater.add(new THREE.Mesh(limbGeo, brass));
   disposables.push(limbGeo);
 
@@ -383,7 +383,7 @@ function buildAstrolabe(engraving: THREE.CanvasTexture) {
   group.add(reteOuter, reteMid, reteInner);
 
   function ring(parent: THREE.Group, r: number, tube: number, x: number, y: number) {
-    const geo = new THREE.TorusGeometry(r, tube, 6, 72);
+    const geo = new THREE.TorusGeometry(r, tube, 5, 48);
     const mesh = new THREE.Mesh(geo, brassHi);
     mesh.position.set(x, y, 0.06);
     parent.add(mesh);
@@ -467,10 +467,12 @@ function buildAstrolabe(engraving: THREE.CanvasTexture) {
 
 export default function AstrolabeCanvas({
   onReady,
+  onUnavailable,
   className,
   progressRef,
 }: {
   onReady?: () => void;
+  onUnavailable?: () => void;
   className?: string;
   /**
    * Progresso de scroll 0→1, escrito fora do React (MotionValue) e lido aqui
@@ -499,7 +501,7 @@ export default function AstrolabeCanvas({
       return;
     }
 
-    const maxDpr = coarse ? 1 : 1.5;
+    const maxDpr = 1.25;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -587,6 +589,8 @@ export default function AstrolabeCanvas({
     let raf = 0;
     let last = 0;
     let clock = 0;
+    let lastRender = 0;
+    let contextLost = false;
     let inView = false;
     let ready = false;
 
@@ -597,6 +601,11 @@ export default function AstrolabeCanvas({
     let progress = 0;
 
     function frame(now: number) {
+      if (now - lastRender < 1000 / 30) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+      lastRender = now;
       const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
       last = now;
 
@@ -643,7 +652,7 @@ export default function AstrolabeCanvas({
     }
 
     function start() {
-      if (raf || !inView || document.hidden) return;
+      if (raf || !inView || document.hidden || contextLost) return;
       last = 0;
       raf = requestAnimationFrame(frame);
     }
@@ -672,15 +681,23 @@ export default function AstrolabeCanvas({
 
     const ro = new ResizeObserver(() => {
       resize();
-      if (!raf) renderer.render(scene, camera);
+      if (!raf && inView && !document.hidden && !contextLost) renderer.render(scene, camera);
     });
     ro.observe(host);
 
     function onContextLost(event: Event) {
       event.preventDefault();
+      contextLost = true;
+      ready = false;
       stop();
+      onUnavailable?.();
+    }
+    function onContextRestored() {
+      contextLost = false;
+      start();
     }
     canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
 
     return () => {
       stop();
@@ -690,11 +707,13 @@ export default function AstrolabeCanvas({
       window.removeEventListener("pointermove", onPointerMove);
       host.removeEventListener("pointerleave", onPointerLeave);
       canvas.removeEventListener("webglcontextlost", onContextLost);
+      canvas.removeEventListener("webglcontextrestored", onContextRestored);
       for (const item of disposables) item.dispose();
       renderer.dispose();
+      renderer.forceContextLoss();
       canvas.remove();
     };
-  }, [onReady, progressRef]);
+  }, [onReady, onUnavailable, progressRef]);
 
   return <div ref={hostRef} className={className} aria-hidden />;
 }

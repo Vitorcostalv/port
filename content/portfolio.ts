@@ -6,7 +6,7 @@
 export const person = {
   name: "Vitor Costa",
   roles: ["Fullstack Developer", "Software Engineer", "Programming Enthusiast"],
-  availability: "Disponível para novas oportunidades",
+  availability: "Aberto a novas vagas",
   headline: "Desenvolvo sistemas completos, do banco de dados à interface.",
   standfirst:
     "Foco em componentes reutilizáveis, APIs bem estruturadas e qualidade testável.",
@@ -21,7 +21,6 @@ export const navItems = [
   { label: "Stack", href: "#stack" },
   { label: "Experiência", href: "#experiencia" },
   { label: "Projetos", href: "#projetos" },
-  { label: "Depoimentos", href: "#depoimentos" },
   { label: "Contato", href: "#contato" },
 ] as const;
 
@@ -93,7 +92,7 @@ export const stackCategories: { value: StackCategory; label: string }[] = [
 
 export const experience = [
   {
-    period: "2025 — atual",
+    period: "2025 — outubro de 2026",
     company: "VTT",
     role: "Desenvolvedor Junior de Software",
     stack: ["React", "TypeScript", "Cypress"],
@@ -148,27 +147,6 @@ export const projects: Project[] = [
     previewAlt: "Tarja analisando colunas de um schema SQL com categorias, confiança e explicação de um dado sensível.",
   },
 ];
-
-export const testimonials = [
-  {
-    name: "Ana Paula Rodrigues",
-    role: "Tech Lead",
-    company: "VTT",
-    text: "O Vitor entregou a Luna com uma maturidade que não esperávamos de um dev júnior. Ele pensou no fluxo do usuário, na segurança das respostas da IA e na integração com o portal — não precisamos revisar o core nem uma vez depois do merge.",
-  },
-  {
-    name: "Lucas Mendes",
-    role: "Desenvolvedor Sênior",
-    company: "VTT",
-    text: "A refatoração do analytics foi um trabalho sólido: ele mapeou os pontos críticos, documentou as decisões e entregou algo que o time consegue manter. A cobertura de testes que ele estruturou com Cypress e Jasmine deu uma confiança real nas releases.",
-  },
-  {
-    name: "Prof. Carlos Siqueira",
-    role: "Orientador de TCC",
-    company: "",
-    text: "O Sara_core é um dos projetos de TCC mais completos que orientei. Pipeline de voz, grounding com segurança no LLM e simulação ecológica em tempo real — tudo integrado e funcionando. Vitor tem clareza técnica e sabe transformar conceito em sistema real.",
-  },
-] as const;
 
 export const contactChannels = [
   { label: "Email direto", value: person.email, href: `mailto:${person.email}` },

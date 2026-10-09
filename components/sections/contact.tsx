@@ -72,7 +72,7 @@ export function Contact() {
       <div className="shell">
         <Reveal className="lg:max-w-[62%]">
           <p className="eyebrow">
-            <span className="text-parchment-dim/60">06 </span>Correspondência
+            <span className="text-parchment-dim/60">05 </span>Correspondência
           </p>
           <h2 className="display mt-6 text-[clamp(2rem,7vw,3rem)]">
             Vamos transformar regra complexa em interface previsível.

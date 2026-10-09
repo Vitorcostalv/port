@@ -29,7 +29,7 @@ export function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ${
         scrolled
-          ? "border-[var(--rule)] bg-[rgba(9,11,10,0.86)] backdrop-blur-md"
+          ? "border-[var(--rule)] bg-[rgba(9,11,10,0.96)] lg:backdrop-blur-md"
           : "border-[var(--rule-faint)] bg-transparent"
       }`}
     >
@@ -76,7 +76,7 @@ export function SiteHeader() {
           </Dialog.Trigger>
 
           <Dialog.Portal>
-            <Dialog.Backdrop className="fixed inset-0 z-[60] bg-[rgba(9,11,10,0.82)] backdrop-blur-sm" />
+            <Dialog.Backdrop className="fixed inset-0 z-[60] bg-[rgba(9,11,10,0.92)]" />
             <Dialog.Popup className="fixed inset-x-0 top-0 z-[70] border-b border-[var(--rule)] bg-stone px-5 pb-8 pt-5 outline-none sm:px-8">
               <div className="flex items-center justify-between">
                 <Dialog.Title className="font-mono text-[0.6875rem] uppercase tracking-seal text-brass">

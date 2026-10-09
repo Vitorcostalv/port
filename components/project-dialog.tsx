@@ -22,7 +22,7 @@ export function ProjectDialog({
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-[60] bg-[rgba(9,11,10,0.86)] backdrop-blur-sm" />
+        <Dialog.Backdrop className="fixed inset-0 z-[60] bg-[rgba(9,11,10,0.94)] lg:backdrop-blur-sm" />
         <Dialog.Popup className="fixed left-1/2 top-1/2 z-[70] max-h-[85svh] w-[min(46rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto border border-[var(--rule)] bg-stone p-6 outline-none sm:p-10">
           <div className="flex items-start justify-between gap-3 sm:gap-6">
             <div className="flex min-w-0 items-start gap-4">

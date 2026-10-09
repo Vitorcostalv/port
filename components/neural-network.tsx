@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useMediaQuery } from "@/lib/motion-mode";
+import { useEnhancedGraphics } from "@/lib/graphics-mode";
 
 const layers = [4, 6, 6, 3];
 const nodes = layers.flatMap((count, layer) =>
@@ -19,14 +19,13 @@ const edges = nodes.flatMap((from) =>
 /** Decorative scene, loaded only when visible. The SVG remains usable without WebGL. */
 export function NeuralNetwork() {
   const hostRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const enabled = useEnhancedGraphics();
 
   useEffect(() => {
     const element = hostRef.current;
-    if (!element || reducedMotion) return;
+    if (!element || !enabled) return;
     const host: HTMLDivElement = element;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compact = window.matchMedia("(max-width: 767px)");
     let disposed = false;
     let visible = false;
     let loading = false;
@@ -41,7 +40,7 @@ export function NeuralNetwork() {
         if (disposed || motion.matches) return;
         let renderer: InstanceType<typeof THREE.WebGLRenderer>;
         try {
-          renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !compact.matches, powerPreference: "low-power" });
+          renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: "low-power" });
         } catch {
           return;
         }
@@ -52,25 +51,28 @@ export function NeuralNetwork() {
         network.rotation.set(0.12, -0.22, -0.06);
         scene.add(network);
 
-        const nodeGeometry = new THREE.IcosahedronGeometry(0.085, 1);
+        const nodeGeometry = new THREE.IcosahedronGeometry(0.085, 0);
         const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xd1ad67 });
         const signalMaterial = new THREE.MeshBasicMaterial({ color: 0xddd1b7 });
-        nodes.forEach(({ x, y, z }) => {
-          const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-          node.position.set(x, y, z);
-          network.add(node);
+        const nodeMesh = new THREE.InstancedMesh(nodeGeometry, nodeMaterial, nodes.length);
+        const transform = new THREE.Object3D();
+        nodes.forEach(({ x, y, z }, index) => {
+          transform.position.set(x, y, z);
+          transform.updateMatrix();
+          nodeMesh.setMatrixAt(index, transform.matrix);
         });
+        nodeMesh.instanceMatrix.needsUpdate = true;
+        network.add(nodeMesh);
         const positions = edges.flatMap(({ from, to }) => [from.x, from.y, from.z, to.x, to.y, to.z]);
         const lineGeometry = new THREE.BufferGeometry();
         lineGeometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
         const lineMaterial = new THREE.LineBasicMaterial({ color: 0xb18a48, transparent: true, opacity: 0.24 });
         network.add(new THREE.LineSegments(lineGeometry, lineMaterial));
-        const signals = edges.filter((_, index) => index % 7 === 0).map((edge) => {
-          const mesh = new THREE.Mesh(nodeGeometry, signalMaterial);
-          mesh.scale.setScalar(0.55);
-          network.add(mesh);
-          return { edge, mesh };
-        });
+        const signals = edges.filter((_, index) => index % 7 === 0);
+        const signalMesh = new THREE.InstancedMesh(nodeGeometry, signalMaterial, signals.length);
+        signalMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+        signalMesh.frustumCulled = false;
+        network.add(signalMesh);
         const canvas = renderer.domElement;
         canvas.setAttribute("aria-hidden", "true");
         canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none";
@@ -82,19 +84,23 @@ export function NeuralNetwork() {
         const render = (time: number) => {
           frame = 0;
           if (!visible || document.hidden || motion.matches || lost) return;
-          if (time - previous >= (compact.matches ? 1000 / 30 : 1000 / 60)) {
+          if (time - previous >= (1000 / 30)) {
             previous = time;
             const seconds = time * 0.001;
             network.rotation.y = -0.22 + Math.sin(seconds * 0.3) * 0.18 + pointer.x * 0.18;
             network.rotation.x = 0.12 + Math.cos(seconds * 0.25) * 0.07 + pointer.y * 0.12;
-            signals.forEach(({ edge, mesh }, index) => {
+            signals.forEach((edge, index) => {
               const progress = (seconds * 0.3 + index * 0.17) % 1;
-              mesh.position.set(
+              transform.position.set(
                 edge.from.x + (edge.to.x - edge.from.x) * progress,
                 edge.from.y + (edge.to.y - edge.from.y) * progress,
                 edge.from.z + (edge.to.z - edge.from.z) * progress,
               );
+              transform.scale.setScalar(0.55);
+              transform.updateMatrix();
+              signalMesh.setMatrixAt(index, transform.matrix);
             });
+            signalMesh.instanceMatrix.needsUpdate = true;
             renderer.render(scene, camera);
           }
           frame = requestAnimationFrame(render);
@@ -105,7 +111,7 @@ export function NeuralNetwork() {
           if (visible && !document.hidden && !motion.matches && !lost) frame = requestAnimationFrame(render);
         };
         const resize = () => {
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, compact.matches ? 1.25 : 1.75));
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
           renderer.setSize(host.clientWidth, host.clientHeight, false);
           camera.aspect = host.clientWidth / Math.max(host.clientHeight, 1);
           camera.updateProjectionMatrix();
@@ -147,12 +153,15 @@ export function NeuralNetwork() {
           canvas.removeEventListener("webglcontextlost", onContextLost);
           canvas.removeEventListener("webglcontextrestored", onContextRestored);
           document.removeEventListener("visibilitychange", updateAnimation!);
+          nodeMesh.dispose();
+          signalMesh.dispose();
           nodeGeometry.dispose();
           lineGeometry.dispose();
           nodeMaterial.dispose();
           signalMaterial.dispose();
           lineMaterial.dispose();
           renderer.dispose();
+          renderer.forceContextLoss();
           canvas.remove();
           delete host.dataset.ready;
         };
@@ -173,7 +182,7 @@ export function NeuralNetwork() {
       observer.disconnect();
       cleanupScene?.();
     };
-  }, [reducedMotion]);
+  }, [enabled]);
 
   return (
     <div className="min-w-0">

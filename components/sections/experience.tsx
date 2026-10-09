@@ -28,7 +28,7 @@ export function Experience() {
                     passam ao lado. É o único sticky desta seção. */}
                 <div className="flex items-start gap-4 lg:col-span-3 lg:flex-col lg:gap-5 lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:self-start">
                   <AstrolabeSeal className="shrink-0" />
-                  <p className="font-mono text-[0.6875rem] uppercase tracking-seal text-brass">
+                  <p className="font-mono text-[0.6875rem] uppercase leading-6 tracking-seal text-brass">
                     {entry.period}
                   </p>
                 </div>

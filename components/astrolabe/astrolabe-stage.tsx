@@ -1,121 +1,62 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useState, useSyncExternalStore } from "react";
-import { CinematicBackground } from "@/components/cinematic-background";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { EngravedPlate } from "@/components/ornaments";
+import { useEnhancedGraphics } from "@/lib/graphics-mode";
 
 const POSTER = "/media/astrolabe-poster.webp";
-
-// Three.js vive só neste chunk: nada de WebGL no bundle inicial.
 const AstrolabeCanvas = dynamic(() => import("./astrolabe-canvas"), {
   ssr: false,
   loading: () => null,
 });
 
-/** Aparelho fraco, tela estreita ou sem WebGL: fica só o poster. */
-function canRun3D(): boolean {
-  if (typeof window === "undefined") return false;
+type ProgressRef = { current: number };
 
-  const nav = navigator as Navigator & {
-    deviceMemory?: number;
-    connection?: { saveData?: boolean };
-  };
-
-  if (nav.connection?.saveData) return false;
-  if (typeof nav.deviceMemory === "number" && nav.deviceMemory < 4) return false;
-  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return false;
-
-  const coarse = window.matchMedia("(pointer: coarse)").matches;
-  if (coarse && window.innerWidth < 768) return false;
-
-  try {
-    const probe = document.createElement("canvas");
-    const gl =
-      probe.getContext("webgl2") ||
-      probe.getContext("webgl") ||
-      probe.getContext("experimental-webgl");
-    if (!gl) return false;
-    const lose = (gl as WebGLRenderingContext).getExtension("WEBGL_lose_context");
-    lose?.loseContext();
-    return true;
-  } catch {
-    return false;
-  }
+function Instrument({ progressRef }: { progressRef?: ProgressRef }) {
+  const [ready, setReady] = useState(false);
+  const onReady = useCallback(() => setReady(true), []);
+  const onUnavailable = useCallback(() => setReady(false), []);
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={POSTER} alt="" decoding="async" className={`absolute inset-0 size-full object-contain ${ready ? "opacity-0" : "opacity-100"}`} />
+      <AstrolabeCanvas onReady={onReady} onUnavailable={onUnavailable} progressRef={progressRef} className={`absolute inset-0 size-full ${ready ? "opacity-100" : "opacity-0"}`} />
+    </>
+  );
 }
-
-// Sonda de capacidade: roda uma única vez, no cliente, e nunca durante o SSR.
-let probed: boolean | undefined;
-const subscribeNever = () => () => undefined;
-const readCapability = () => {
-  if (probed === undefined) probed = canRun3D();
-  return probed;
-};
-const serverCapability = () => false;
 
 export function AstrolabeStage({
   className = "mx-auto max-w-[34rem]",
   progressRef,
-}: {
-  className?: string;
-  /** Progresso de scroll 0→1 repassado ao rAF do canvas, sem passar por state. */
-  progressRef?: { current: number };
-}) {
-  const use3D = useSyncExternalStore(subscribeNever, readCapability, serverCapability);
-  const [canvasReady, setCanvasReady] = useState(false);
+}: { className?: string; progressRef?: ProgressRef }) {
+  const enabled = useEnhancedGraphics();
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [idle, setIdle] = useState(false);
 
-  const handleReady = useCallback(() => setCanvasReady(true), []);
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host || !enabled) return;
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.05 });
+    observer.observe(host);
+    const schedule = window.requestIdleCallback ?? ((callback: () => void) => window.setTimeout(callback, 1200));
+    const cancel = window.cancelIdleCallback ?? window.clearTimeout;
+    const handle = schedule(() => setIdle(true), { timeout: 4000 });
+    return () => { observer.disconnect(); cancel(handle); };
+  }, [enabled]);
 
   return (
-    <div
-      // aspect-ratio fixo nos dois breakpoints: o canvas nunca empurra layout.
-      // Sem `isolate`: a composição em screen precisa alcançar o fundo da seção
-      // para que a pedra escura do vídeo desapareça de verdade.
-      // Com `overflow-hidden`: a gravura de fundo tem 112% e escaparia da caixa,
-      // gerando 1px de overflow horizontal em telas estreitas. A máscara já
-      // fecha dentro do box, então o clip não reintroduz borda visível.
-      className={`relative aspect-square w-full overflow-hidden sm:aspect-[4/5] lg:aspect-square ${className}`}
-    >
-      {/* 1. cinemagraph medieval, composto em `screen`: o escuro dissolve no
-             fundo e só luar, vela e papiro emergem. A máscara elíptica
-             irregular remove qualquer borda reconhecível. O vídeo viaja junto
-             com o 3D — aparelho sem WebGL não paga os megabytes do mp4. */}
-      <CinematicBackground
-        poster="/media/candlelit-study-poster.webp"
-        mp4="/media/candlelit-study-loop.mp4"
-        allowVideo={use3D}
-        className="scene-mask anim-scene"
-        mediaClassName="scene-blend object-[40%_36%] scale-[1.12] contrast-[1.2] brightness-[1.1] saturate-[0.85]"
-      />
-
-      {/* gravura de fundo — placa graduada, quase imperceptível */}
-      <EngravedPlate className="anim-scene absolute left-1/2 top-1/2 h-[112%] w-[112%] -translate-x-1/2 -translate-y-1/2 text-parchment opacity-[0.07]" />
-
-      {/* 2 e 3. instrumento: emerge depois da cena, como uma peça só. */}
+    <div ref={hostRef} aria-hidden="true" className={`relative aspect-square w-full overflow-hidden sm:aspect-[4/5] lg:aspect-square ${className}`}>
+      {/* A still image preserves the atmosphere without decoding a looping video. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/media/candlelit-study-poster.webp" alt="" decoding="async" loading="lazy" className="scene-mask scene-blend absolute inset-0 size-full object-cover object-[40%_36%]" />
+      <EngravedPlate className="absolute left-1/2 top-1/2 h-[112%] w-[112%] -translate-x-1/2 -translate-y-1/2 text-parchment opacity-[0.07]" />
       <div className="anim-instrument absolute inset-0">
-        {/* poster estático do próprio astrolábio: sempre presente, é o fallback */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={POSTER}
-          alt=""
-          aria-hidden
-          decoding="async"
-          fetchPriority={use3D ? "low" : "high"}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-700 ${
-            canvasReady ? "opacity-0" : "opacity-100"
-          }`}
-        />
-
-        {/* canvas Three.js transparente por cima */}
-        {use3D ? (
-          <AstrolabeCanvas
-            onReady={handleReady}
-            progressRef={progressRef}
-            className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${
-              canvasReady ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ) : null}
+        {enabled && visible && idle ? <Instrument progressRef={progressRef} /> : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={POSTER} alt="" decoding="async" loading="lazy" className="absolute inset-0 size-full object-contain" />
+        )}
       </div>
     </div>
   );

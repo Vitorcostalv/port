@@ -10,6 +10,13 @@
   visibility: hidden;
 }
 
+@media (max-width: 1023px) {
+  /* Avoid compositing a fixed noise layer over every mobile scroll frame. */
+  body::after {
+    display: none;
+  }
+}
+
 /* ARCANE ENGINEERING — techno-medieval editorial
    Paleta única, escura. Sem tema claro. */
 :root {

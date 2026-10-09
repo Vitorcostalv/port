@@ -6,7 +6,6 @@ import { Projects } from "@/components/sections/projects";
 import { ProjectsOverture } from "@/components/sections/projects-overture";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { Stack } from "@/components/sections/stack";
-import { Testimonials } from "@/components/sections/testimonials";
 import { SiteHeader } from "@/components/site-header";
 
 export default function Home() {
@@ -21,7 +20,6 @@ export default function Home() {
         {/* Única inversão de cor do site: a ruptura antes dos projetos. */}
         <ProjectsOverture />
         <Projects />
-        <Testimonials />
         <Contact />
       </main>
       <SiteFooter />
