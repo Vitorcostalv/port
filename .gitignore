@@ -11,3 +11,4 @@ pnpm-debug.log*
 
 # Captura de telas gerada localmente, nao versionada
 portfolio-telas.pdf
+.vercel/

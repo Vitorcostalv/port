@@ -34,7 +34,7 @@ export function Contact() {
       const data = new FormData(form);
       const subject = encodeURIComponent(String(data.get("subject") || "Contato pelo portfólio"));
       const body = encodeURIComponent(
-        `Nome: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`,
+        `Nome: ${data.get("from_name")}\nEmail: ${data.get("from_email")}\n\n${data.get("message")}`,
       );
       window.location.href = `mailto:${person.email}?subject=${subject}&body=${body}`;
       setStatus({ kind: "success", message: "Abrindo seu cliente de email." });
@@ -62,8 +62,8 @@ export function Contact() {
   }
 
   const fields = [
-    { name: "name", label: "Nome", type: "text", autoComplete: "name" },
-    { name: "email", label: "Email", type: "email", autoComplete: "email" },
+    { name: "from_name", label: "Nome", type: "text", autoComplete: "name" },
+    { name: "from_email", label: "Email", type: "email", autoComplete: "email" },
     { name: "subject", label: "Assunto", type: "text", autoComplete: "off" },
   ] as const;
 
