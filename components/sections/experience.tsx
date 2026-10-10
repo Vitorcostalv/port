@@ -8,7 +8,7 @@ export function Experience() {
     <section id="experiencia" className="defer-paint py-16 sm:py-36">
       <div className="shell">
         <Reveal className="lg:pl-[25%]">
-          <h2 className="display text-[clamp(2rem,7vw,3rem)]">Experiência profissional</h2>
+          <h2 className="display text-[clamp(2rem,7vw,3rem)]">Experiência e formação</h2>
         </Reveal>
 
         <ol className="mt-10 sm:mt-14">
@@ -35,7 +35,9 @@ export function Experience() {
 
                   <InView
                     as="div"
-                    className="seq mt-10 grid gap-px bg-[var(--rule-faint)] lg:grid-cols-3"
+                    className={`seq mt-10 grid gap-px bg-[var(--rule-faint)] ${
+                      entry.duties.length === 1 ? "lg:grid-cols-1" : "lg:grid-cols-3"
+                    }`}
                     style={{ "--seq-step": "110ms" } as React.CSSProperties}
                   >
                     {entry.duties.map((duty, index) => (

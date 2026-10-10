@@ -91,6 +91,15 @@ export const experience = [
       "Criei testes automatizados com Cypress e Jasmine para os principais fluxos do portal.",
     ],
   },
+  {
+    period: "Último semestre",
+    company: "Universidade Cruzeiro do Sul",
+    role: "Bacharelado em Ciência da Computação",
+    stack: ["Formação acadêmica"],
+    duties: [
+      "Atualmente cursando o último semestre da graduação em Ciência da Computação.",
+    ],
+  },
 ] as const;
 
 export type Project = {
