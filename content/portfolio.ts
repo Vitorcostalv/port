@@ -13,7 +13,7 @@ export const person = {
   email: "VitorCostalv@proton.me",
   github: "https://github.com/Vitorcostalv",
   linkedin: "https://www.linkedin.com/in/vitorcostalv/",
-  cv: "/assets/Curriculo_Vitor__FullStack.pdf",
+  cv: "/assets/Vitor_Costa_Developer.pdf",
 } as const;
 
 export const navItems = [
